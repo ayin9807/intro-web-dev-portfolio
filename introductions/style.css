@@ -1,0 +1,42 @@
+/*
+ * @Annie Yin
+ * stylesheet for introductions webpage
+ */
+
+#header {
+	border: 10px lightblue;
+	color: gray;
+	font-family: "Andale Mono", monospace;
+	text-align: center;
+	font-size: 50px;
+}
+
+#photo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 8px;
+	width: 200px;
+	height: 280px;
+}
+
+h2 {
+	color: darksalmon;
+	font-family: "Andale Mono", monospace;
+}
+
+li {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 14px;
+}
+
+p {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 14px;
+}
+
+#footer {
+	text-align: left;
+}
