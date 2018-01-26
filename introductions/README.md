@@ -1,11 +1,14 @@
+*Updated for Introductions, Part 2
 - Name: Annie Yin
 - NetID: wy30
 - Date Started: 1/15/18
-- Date Completed: 1/22/18
-- Estimated Number of Hours Worked: 3
+- Date Completed: 1/25/18
+- Estimated Number of Hours Worked: 5
 - Students with whom I discussed the assignment: None
 - Resources used:
 	- Introduction to HTML page from Mozilla (https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started)
+	- Introduction to CSS page from Mozilla (https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS)
+	- W3Schools for CSS help (https://www.w3schools.com/css/default.asp)
 	- Wikipedia for information on boba tea (https://en.wikipedia.org/wiki/Bubble_tea)
 	- Creative Commons for licensing information (https://creativecommons.org/)
 - Assets: 
