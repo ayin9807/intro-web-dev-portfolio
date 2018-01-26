@@ -3,13 +3,25 @@
  * stylesheet for introductions webpage
  */
 
+#pagewrap {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 header {
-	color: gray;
-	font-family: "Andale Mono", monospace;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: lightblue;
+}
+
+header h1 {
+	display: block;
+	color: white;
+	margin: 0;
 	text-align: center;
+	font-family: "Andale Mono", monospace;
 	font-size: 50px;
-	margin-top: 50px;
-	margin-bottom: 30px
 }
 
 #navbar ul {
@@ -20,16 +32,15 @@ header {
 }
 
 #navbar li {
-	color: gray;
 	font-size: 20px;
 	display: inline-block;
-	margin-left: 60px;
-	margin-right: 60px;
+	margin-left: 80px;
+	margin-right: 80px;
 }
 
 #navbar a {
 	text-decoration: none;
-	color: lightblue;
+	color: gray;
 }
 
 #photo {
@@ -66,8 +77,10 @@ h2 {
 li, p {
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 14px;
+	color: gray;
 }
 
 #footer {
 	text-align: center;
+	color: black;
 }
