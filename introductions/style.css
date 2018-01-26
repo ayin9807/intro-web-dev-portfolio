@@ -3,12 +3,33 @@
  * stylesheet for introductions webpage
  */
 
-#header {
-	border: 10px lightblue;
+header {
 	color: gray;
 	font-family: "Andale Mono", monospace;
 	text-align: center;
 	font-size: 50px;
+	margin-top: 50px;
+	margin-bottom: 30px
+}
+
+#navbar ul {
+	list-style-type: none;
+	text-align: center;
+	padding-left: 0;
+	margin-bottom: 30px;
+}
+
+#navbar li {
+	color: gray;
+	font-size: 20px;
+	display: inline-block;
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
+#navbar a {
+	text-decoration: none;
+	color: lightblue;
 }
 
 #photo {
@@ -23,20 +44,30 @@
 }
 
 h2 {
-	color: darksalmon;
 	font-family: "Andale Mono", monospace;
 }
 
-li {
-	font-family: "Lucida Console", Monaco, monospace;
-	font-size: 14px;
+.aboutme {
+	color: darksalmon;
 }
 
-p {
+.csbio {
+	color: mediumseagreen;
+}
+
+.links {
+	color: darkcyan;
+}
+
+.aboutcourse {
+	color: plum;
+}
+
+li, p {
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 14px;
 }
 
 #footer {
-	text-align: left;
+	text-align: center;
 }
