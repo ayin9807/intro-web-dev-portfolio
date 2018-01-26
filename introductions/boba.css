@@ -1,0 +1,16 @@
+@import url("style.css");
+
+#photo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 8px;
+	width: 400px;
+	height: 230px;
+}
+
+.caption {
+	text-align: center;
+}
