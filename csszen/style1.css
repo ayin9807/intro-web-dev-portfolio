@@ -1,0 +1,95 @@
+/*
+ *	author: Annie Yin;
+ */
+
+body {
+	font-family: "Courier New";
+	background-color: lightblue;
+}
+
+.page-wrapper {
+	width: 75%;
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+}
+
+header {
+	color: palevioletred;
+	font-family: "Bookman";
+}
+
+h1 {
+	font-size: 60px;
+ 	text-align: center;
+ 	border: 5px dotted gray;
+ 	width: 600px;
+ 	height: unset;
+ 	display: block;
+ 	margin: auto;
+ 	padding-top: 30px;
+ 	padding-bottom: 30px;
+}
+
+h2 {
+	text-align: center;
+}
+
+.summary {
+	text-align: center;
+	font: italic 1.1em/2.2 georgia;
+	line-height: 50%;
+}
+
+
+
+footer {
+	text-align: center;
+}
+
+.wrapper {
+	font-family: "Futura";
+	list-style-type: none;
+	margin: auto;
+	width: 75%;
+	text-align: justify;
+	padding-top: 2%
+}
+
+.wrapper h3 {
+	text-align: left;
+	color: lightsalmon;
+}
+
+.wrapper li {
+	color: lightslategray;
+	/*list-style-type: none;*/
+	margin: 0;
+    padding: 0;
+}
+
+.wrapper a {
+	text-decoration: none;
+}
+
+.design-selection, .design-archives, .zen-resources {
+	display: inline-flex;
+	padding-left: 1%;
+	padding-right: 1%;
+	width: 30%;
+	border: 3px solid black;
+}
+
+/*.design-archive ul{
+ 	display: block;
+	margin: auto;
+	width: 85%;
+}*/
+
+/*.design-selection, .design-archives, .zen-resources {
+	width: 30%;
+	display: inline-table;
+
+}*/
+
