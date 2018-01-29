@@ -3,15 +3,21 @@
  * stylesheet for introductions webpage
  */
 
+body {
+	font-family: "Andale Mono", monospace;
+	text-align: justify;
+	line-height: 150%;
+}
+
 #pagewrap {
-	width: 1000px;
+	width: 75%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 header {
-	padding-top: 40px;
-	padding-bottom: 40px;
+	padding-top: 4%;
+	padding-bottom: 4%;
 	background-color: lightblue;
 }
 
@@ -24,18 +30,26 @@ header h1 {
 	font-size: 50px;
 }
 
+#navbar {
+	margin-top: 2.5%;
+	margin-bottom: 2.5%;
+}
+
 #navbar ul {
 	list-style-type: none;
 	text-align: center;
 	padding-left: 0;
-	margin-bottom: 30px;
 }
 
 #navbar li {
 	font-size: 20px;
 	display: inline-block;
-	margin-left: 80px;
-	margin-right: 80px;
+	padding-left: 8%;
+	padding-right: 8%;
+}
+
+.div{
+	border-right: 1px solid gray;
 }
 
 #navbar a {
@@ -48,17 +62,18 @@ header h1 {
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 8px;
+	border-radius: 1.5%;
+	padding: 1.5%;
 	width: 200px;
 	height: 280px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 h2 {
-	font-family: "Andale Mono", monospace;
+	color: darksalmon;
 }
 
-.title1 {
+/*.title1 {
 	color: darksalmon;
 }
 
@@ -72,11 +87,11 @@ h2 {
 
 .title4 {
 	color: plum;
-}
+}*/
 
 li, p {
-	font-family: "Lucida Console", Monaco, monospace;
-	font-size: 14px;
+	font-family: "Courier New";
+	font-size: 16px;
 	color: gray;
 }
 
