@@ -7,12 +7,27 @@ body {
 	background-color: lightblue;
 }
 
+a:link { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: teal;
+}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #D4CDDC;
+}
+a:hover, a:focus, a:active { 
+	text-decoration: underline; 
+	color: black;
+}
+
 .page-wrapper {
 	width: 75%;
 	padding: 20px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: white;
+	background-image: url('http://www.allegiancewars.com/wp-content/uploads/2017/08/html-page-background-color-css-html-codes-for-background-color-in-page-background-color.jpg');
 }
 
 header {
@@ -42,10 +57,44 @@ h2 {
 	line-height: 50%;
 }
 
+.preamble {
+	width: 40%;
+	display: block;
+}
 
+#zen-explanation {
+	width: 40%;
+	display: block;
+	margin-left: 60%;
+}
+
+#zen-participation {
+	width: 40%;
+	display: block;
+}
+
+#zen-benefits {
+	width: 50%;
+	display: block;
+	margin-left: 50%;
+}
+
+#zen-requirements {
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+
+#zen-requirements h3 {
+	font-family: 
+}
 
 footer {
 	text-align: center;
+	border: 2px dotted lime;
+	width: 30%;
+	display: block;
+	margin: auto;
 }
 
 .wrapper {
