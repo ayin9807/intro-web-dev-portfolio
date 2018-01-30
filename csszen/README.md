@@ -9,5 +9,6 @@
 	- W3Schools for CSS help (https://www.w3schools.com/css/default.asp)
 - Assets: 
 	- Background image for style1.css (http://www.allegiancewars.com/wp-content/uploads/2017/08/html-page-background-color-css-html-codes-for-background-color-in-page-background-color.jpg)
+	- Background gif for style2.css (https://media.giphy.com/media/xULW8zjkhlKJwobzRS/giphy.gif)
 - Bugs/concerns: None, although the designs don't look very good
 - Extra credit features: None?
