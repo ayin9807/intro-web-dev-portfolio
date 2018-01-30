@@ -2,11 +2,12 @@
 - NetID: wy30
 - Date Started: 1/28/18
 - Date Completed: 1/30/18
-- Estimated Number of Hours Worked: 5
+- Estimated Number of Hours Worked: 6
 - Students with whom I discussed the assignment: None
 - Resources used:
 	- Introduction to CSS page from Mozilla (https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS)
 	- W3Schools for CSS help (https://www.w3schools.com/css/default.asp)
 - Assets: 
-- Bugs/concerns: Of course stylistic concerns, but I'm sure I will address them after implementing CSS and throughout the semester
+	- Background image for style1.css (http://www.allegiancewars.com/wp-content/uploads/2017/08/html-page-background-color-css-html-codes-for-background-color-in-page-background-color.jpg)
+- Bugs/concerns: None, although the designs don't look very good
 - Extra credit features: None?

@@ -25,6 +25,9 @@ header {
 	font-family: "Papyrus";
 }
 
+/* Aligned the main header to the left margin, made room on the right for "The 
+   Beauty of CSS Design" and #zen-summary */
+
 h1 {
 	color: gray;
 	font-size: 60px;
@@ -50,7 +53,7 @@ h2 {
 	float: right;
 }
 
-div#zen-summary {
+#zen-summary {
 	width: 30%;
 	display: inline-table;
 	text-align: center;
@@ -61,6 +64,8 @@ div#zen-summary {
 	font-family: "Papyrus";
 }
 
+/* Aligned to right of webpage, added box shadow */
+
 .preamble, #zen-explanation, #zen-participation, #zen-benefits, #zen-requirements {
 	display: block;
 	margin-left: 23%;
@@ -69,6 +74,8 @@ div#zen-summary {
 	padding-bottom: 0.5%;
 	font-family: "Times New Roman";
 }
+
+/* Positioned footer also at the top right of webpage along with summary */
 
 footer {
 	text-align: center;
@@ -99,6 +106,9 @@ footer {
 	margin: 0;
     padding: 0;
 }
+
+/* Made into a sidebar aligned to the left, set position to fixed so that it 
+   would move down while scrolling */
 
 .design-selection, .design-archives, .zen-resources {
 	display: table;

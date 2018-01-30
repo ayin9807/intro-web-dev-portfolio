@@ -1,5 +1,5 @@
 /*
- *	author: Annie Yin;
+ *	author: Annie Yin
  */
 
 body {
@@ -21,6 +21,10 @@ a:hover, a:focus, a:active {
 	text-decoration: underline; 
 	color: black;
 }
+
+/* Wanted to make the side background a different color/image than the middle, so
+   set body background-color as lightblue but the background of .page-wrapper to a 
+   different image */
 
 .page-wrapper {
 	width: 75%;
@@ -57,6 +61,8 @@ h2 {
 	line-height: 50%;
 }
 
+/* Alternating positions to left and right of the page */
+
 .preamble {
 	width: 40%;
 	display: block;
@@ -78,6 +84,8 @@ h2 {
 	display: block;
 	margin-left: 50%;
 }
+
+/* Aligned zen-requirements's style with .summary's style */
 
 #zen-requirements {
 	display: block;
@@ -127,6 +135,8 @@ footer {
 	text-decoration: none;
 }
 
+/* Wanted these to be side-by-side at the bottom of the page */
+
 .design-selection, .design-archives, .zen-resources {
 	display: inline-flex;
 	padding-left: 1%;
@@ -134,16 +144,4 @@ footer {
 	width: 30%;
 	border: 3px solid black;
 }
-
-/*.design-archive ul{
- 	display: block;
-	margin: auto;
-	width: 85%;
-}*/
-
-/*.design-selection, .design-archives, .zen-resources {
-	width: 30%;
-	display: inline-table;
-
-}*/
 
