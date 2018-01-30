@@ -4,12 +4,12 @@
 
 body {
 	font-family: "Courier New";
-	/*background-image: url('https://i.pinimg.com/736x/31/f4/be/31f4be7ca9563775423bb3c951cdd4c4--summer-bridal-showers-popsicle-party.jpg');*/
+	background-image: url('https://media.giphy.com/media/xULW8zjkhlKJwobzRS/giphy.gif');
 }
 
 a:link { 
 	text-decoration: none; 
-	color: lightblue;
+	color: navy;
 }
 a:visited { 
 	font-weight: bold; 
