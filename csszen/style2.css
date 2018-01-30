@@ -3,5 +3,124 @@
  */
 
 body {
-	
+	font-family: "Courier New";
+	/*background-image: url('https://i.pinimg.com/736x/31/f4/be/31f4be7ca9563775423bb3c951cdd4c4--summer-bridal-showers-popsicle-party.jpg');*/
+}
+
+a:link { 
+	text-decoration: none; 
+	color: lightblue;
+}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	color: #D4CDDC;
+}
+a:hover, a:focus, a:active { 
+	text-decoration: underline; 
+	color: black;
+}
+
+header {
+	font-family: "Papyrus";
+}
+
+h1 {
+	color: gray;
+	font-size: 60px;
+ 	text-align: center;
+ 	border-bottom: 5px solid gray;
+ 	border-right: 5px solid gray;
+ 	width: 900px;
+ 	height: unset;
+ 	display: block;
+ 	padding-top: 30px;
+ 	padding-bottom: 30px;
+ 	background-color: purple;
+}
+
+h1, h2 {
+	display: inline-table;
+	margin: 0;
+}
+
+h2 {
+	text-align: center;
+	display: block;
+	float: right;
+}
+
+div#zen-summary {
+	width: 30%;
+	display: inline-table;
+	text-align: center;
+	position: absolute;
+	top: 30px;
+	right: 10px;
+	line-height: 100%;
+	font-family: "Papyrus";
+}
+
+.preamble, #zen-explanation, #zen-participation, #zen-benefits, #zen-requirements {
+	display: block;
+	margin-left: 23%;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding-left: 1.5%;
+	padding-bottom: 0.5%;
+	font-family: "Times New Roman";
+}
+
+footer {
+	text-align: center;
+	border: 3px solid salmon;
+	width: 30%;
+	position: absolute;
+	top: 130px;
+	right: 10px;
+}
+
+.wrapper {
+	font-family: "Arial";
+	list-style-type: none;
+	margin: auto;
+	width: 75%;
+	text-align: justify;
+	padding-top: 2%;
+}
+
+.wrapper h3 {
+	text-align: center;
+	color: lime;
+}
+
+.wrapper li {
+	color: lightslategray;
+	list-style-type: none;
+	margin: 0;
+    padding: 0;
+}
+
+.design-selection, .design-archives, .zen-resources {
+	display: table;
+	padding-left: 1%;
+	padding-right: 1%;
+	width: 18%;
+}
+
+.design-selection{
+	position: fixed;
+	left: 0.01%;
+	top: 20%;
+}
+
+.design-archives{
+	position: fixed;
+	left: 0.01%;
+	top: 55%;
+}
+
+.zen-resources{
+	position: fixed;
+	left: 0.01%;
+	top: 68%;
 }
