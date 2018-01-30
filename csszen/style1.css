@@ -83,10 +83,15 @@ h2 {
 	display: block;
 	margin: auto;
 	text-align: center;
+	font-family: "Georgia";
+	font-style: italic;
+	line-height: 100%
 }
 
 #zen-requirements h3 {
-	font-family: 
+	color: palevioletred;
+	font-size: 30px;
+	font-style: normal;
 }
 
 footer {
