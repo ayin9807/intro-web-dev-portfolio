@@ -18,7 +18,7 @@ body {
 header {
 	padding-top: 4%;
 	padding-bottom: 4%;
-	background-color: lightblue;
+	background-color: #deb0c4;
 }
 
 header h1 {
@@ -70,7 +70,7 @@ header h1 {
 }
 
 h2 {
-	color: darksalmon;
+	color: slategray;
 }
 
 /*.title1 {
