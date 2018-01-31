@@ -1,0 +1,42 @@
+@import url("style.css");
+
+header {
+	background-color: lightblue;
+}
+
+h2 {
+	color: darksalmon;
+	text-align: center;
+	margin: 5% 0;
+}
+
+figcaption {
+	text-align: center;
+}
+
+figure {
+	width: 25%;
+	display: inline-block;
+}
+
+figure img{
+	width: 100%;
+	display: inline-block;
+}
+
+/*#container {
+	display: table;
+	width: 80%;
+	margin: 20px auto;
+}
+
+#container a {
+	display: table-cell;
+	text-align: center;
+	width: 16%;
+}
+
+#container img {
+	width: 25%;
+}*/
+
