@@ -10,18 +10,24 @@ h2 {
 	margin: 5% 0;
 }
 
+#container {
+	display: inline-flex;
+	margin: auto;
+}
+
 figcaption {
 	text-align: center;
 }
 
 figure {
-	width: 25%;
 	display: inline-block;
 }
 
 figure img{
-	width: 100%;
-	display: inline-block;
+	width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /*#container {
