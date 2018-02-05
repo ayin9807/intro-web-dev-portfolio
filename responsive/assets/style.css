@@ -1,10 +1,25 @@
 /*
- *	Author: Annie Yin;
+ *	Author: Annie Yin
  */
 
+body {
+	font-family: "Helvetica"
+}
+
+a {
+	color: inherit;
+}
+
+.site-title {
+	color: orange;
+}
+
+.entry-title, time, .comments-link {
+	color: lightblue;
+}
 
 #logo {
-	width:10%;
+	width: 20%;
 }
 
 .site-logo, .entry-thumbnail {
@@ -13,6 +28,13 @@
 
 .site-nav-menu {
 	list-style: none;
+	color: darkgray;
+	display: inline-flex;
+	flex-direction: row;
+}
+
+.site-nav-menu li {
+	margin: 1%;
 }
 
 .entry-content p {
@@ -23,10 +45,13 @@
 	color: orange;
 }
 
+.center {
+	align-self: center;
+}
+
 img {
 	margin-bottom: 4%;
 }
-
 
 @media (min-width: 0px){
 	.site-nav-title {
@@ -40,9 +65,22 @@ img {
 	}
 }
 
+@media (max-width: 576px) {
+	.entry-content {
+		display: none;
+	}
+}
+
 footer ul {
 	list-style: none;
-	display: block;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+footer li {
+	color: darkgray;
+	margin: 1%;
 }
 
 .site-copyright {
