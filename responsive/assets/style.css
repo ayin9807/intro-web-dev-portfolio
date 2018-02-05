@@ -2,91 +2,104 @@
  *	Author: Annie Yin
  */
 
+/* change all text to helvetica */
 body {
 	font-family: "Helvetica"
 }
 
+/* get rid of hyperlink blue + underline */
 a {
 	color: inherit;
 }
 
+/* changed main title text color ("nature watch") to orange */
 .site-title {
 	color: orange;
 }
 
+/* changed article title, time, and comment link text color to lightblue */
 .entry-title, time, .comments-link {
 	color: lightblue;
 }
 
+/* made the logo smaller */
 #logo {
 	width: 20%;
 }
 
+/* made images be contained within its container, also created space between the bottom
+   of an image and the rest of content below */
 .site-logo, .entry-thumbnail {
 	width: 100%;
+	margin-bottom: 4%;
 }
 
 .site-nav-menu {
-	list-style: none;
-	color: darkgray;
-	display: inline-flex;
-	flex-direction: row;
+	list-style: none;	/* got rid of bullets */
+	color: darkgray;	/* made nav menu text color darkgray */
+	display: flex;	/* display menu as flex */
+	flex-direction: row;	/* display menu elements in a row */
 }
 
+/* put some space between the menu elements */
 .site-nav-menu li {
 	margin: 1%;
 }
 
+/* put space below text for an article to separate different articles */
 .entry-content p {
 	margin-bottom: 5%
 }
 
+/* made "read more" text color orange */
 .entry-content a {
 	color: orange;
 }
 
+/* align site title and menu elements center vertically */
 .center {
 	align-self: center;
 }
 
-img {
-	margin-bottom: 4%;
-}
-
 footer ul {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	list-style: none;	/* got rid of bullets */
+	display: flex;	/* display footer as flex */
+	flex-direction: row;	/* display menu elements in a row */
+	justify-content: center;	/* align footer in the center of page */
 }
 
 footer li {
-	color: darkgray;
-	margin: 1%;
+	color: darkgray;	/* footer element text in darkgray */
+	margin: 1%;		/* put some space between the footer elements */
 }
 
+/* align copyright text to right of page */
 .site-copyright {
 	text-align: right;
 }
 
+/* never displaying "menu" */
 @media (min-width: 0px){
 	.site-nav-title {
 		display: none;
 	}
 }
 
+/* only displaying the menu on larger screens */
 @media (max-width: 1068px) {
 	.site-nav-menu {
 		display: none;
 	}
 }
 
+/* not displaying the text for posts for small screens */
 @media (max-width: 576px) {
 	.entry-content {
 		display: none;
 	}
 }
 
+/* aligning the copyright to the center of the page for small/medium screens */
 @media (max-width: 768px) {
 	.site-copyright {
 		text-align: center;
