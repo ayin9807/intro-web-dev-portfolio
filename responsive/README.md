@@ -2,9 +2,17 @@
 - NetID: wy30
 - Date Started: 2/3/18
 - Date Completed: 2/5/18
-- Estimated Number of Hours Worked: 
+- Estimated Number of Hours Worked: 6
 - Students with whom I discussed the assignment: None
 - Resources used:
-- Assets: 
-- Bugs/concerns:
-- Extra credit features: 
+	- For general info on bootstrap (https://www.sitepoint.com/building-responsive-websites-using-twitter-bootstrap/)
+	- W3Schools for media queries (https://www.w3schools.com/css/css_rwd_mediaqueries.asp)
+	- CSS Tricks for info on Flexbox (https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- Assets: None
+- Bugs/concerns: 
+	- The logo looks a bit too small on smaller screens
+	- Facebook/Twitter links and site-copyright are not aligned on small/medium screens
+	- Could not get the pictures to have the same height
+- Other comments: 
+	- I explained what I was trying to accomplish in the index.html/style.css files in terms of bootstrap + media queries. 
+	- Overall, I was attempting to use both to recreate the original design as close as possible.
