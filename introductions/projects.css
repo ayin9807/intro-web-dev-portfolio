@@ -10,7 +10,7 @@ h2 {
 	margin: 5% 0;
 }
 
-#container {
+.container {
 	display: inline-flex;
 	margin: auto;
 }
@@ -28,6 +28,10 @@ figure img{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+p {
+	text-align: center;
 }
 
 /*#container {
