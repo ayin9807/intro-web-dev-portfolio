@@ -1,0 +1,50 @@
+/*
+ *	Author: Annie Yin;
+ */
+
+
+#logo {
+	width:10%;
+}
+
+.site-logo, .entry-thumbnail {
+	width: 100%;
+}
+
+.site-nav-menu {
+	list-style: none;
+}
+
+.entry-content p {
+	margin-bottom: 5%
+}
+
+.entry-content a {
+	color: orange;
+}
+
+img {
+	margin-bottom: 4%;
+}
+
+
+@media (min-width: 0px){
+	.site-nav-title {
+		display: none;
+	}
+}
+
+@media (max-width: 1068px) {
+	.site-nav-menu {
+		display: none;
+	}
+}
+
+footer ul {
+	list-style: none;
+	display: block;
+}
+
+.site-copyright {
+	text-align: right;
+}
