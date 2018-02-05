@@ -53,6 +53,22 @@ img {
 	margin-bottom: 4%;
 }
 
+footer ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+footer li {
+	color: darkgray;
+	margin: 1%;
+}
+
+.site-copyright {
+	text-align: right;
+}
+
 @media (min-width: 0px){
 	.site-nav-title {
 		display: none;
@@ -71,18 +87,8 @@ img {
 	}
 }
 
-footer ul {
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-footer li {
-	color: darkgray;
-	margin: 1%;
-}
-
-.site-copyright {
-	text-align: right;
+@media (max-width: 768px) {
+	.site-copyright {
+		text-align: center;
+	}
 }
