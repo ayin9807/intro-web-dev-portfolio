@@ -12,6 +12,7 @@ var ROW = 4;
 var COL = 5;
 var PADDING = 10;
 var BRICK_HEIGHT = 15;
+var TOP_OFFSET = 30;
 
 // keeping track of brick locations to detect collision
 // if hit = 0, then not hit yet
@@ -24,6 +25,9 @@ for (var r = 0; r < ROW; r++) {
     }
 }
 
+// [h, r, l, b]
+var cheatCodeKey = [72, 82, 76, 66];
+
 /*
  * Key input manager
  */
@@ -33,6 +37,8 @@ class InputManager {
         this.canvas = canvas;
         this.leftPressed = false;
         this.rightPressed = false;
+        this.enterPressed = false;
+        this.cheatKeyPressed = false;
     }
     
     keyDownHandler (e) {
@@ -40,14 +46,20 @@ class InputManager {
             this.rightPressed = true;
         } else if (e.keyCode == 37) {
             this.leftPressed = true;
+        } else if (e.keyCode == 13) {
+            this.enterPressed = true;
+        } else if (e.keyCode == 72) {
+            this.cheatKeyPressed = true;
         }
     }
     
-    keyUpHandler(e) {
+    keyUpHandler (e) {
         if (e.keyCode == 39) {
             this.rightPressed = false;
         } else if (e.keyCode == 37) {
             this.leftPressed = false;
+        } else if (e.keyCode == 72) {
+            this.cheatKeyPressed = false;
         }
     }
 }
@@ -76,6 +88,11 @@ class Ball {
         ctx.fill();
         ctx.closePath();
     }
+    
+    reset () {
+        this.x = this.startX;
+        this.y = this.startY;
+    }
 }
 
 class Paddle {
@@ -102,6 +119,11 @@ class Paddle {
         ctx.fillStyle = 'lightblue';
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
+    
+    reset () {
+        this.x = this.startX;
+        this.y = this.startY;
+    }
 }
 
 class Bricks {
@@ -114,18 +136,65 @@ class Bricks {
         this.width = (canvas.width - ((this.ccount + 1) * this.padding)) / ccount;
     }
     
-    draw (ctx) {
+    draw (ctx) {      
         for (var r = 0; r < this.rcount; r++) {
             for (var c = 0; c < this.ccount; c++) {
                 if (brick_info[r][c].hit == 0) {
                     var brick_x = c * (this.width + this.padding) + this.padding;
-                    var brick_y = r * (this.height + this.padding) + this.padding;
+                    var brick_y = r * (this.height + this.padding) + this.padding + TOP_OFFSET;
                     brick_info[r][c].x = brick_x;
                     brick_info[r][c].y = brick_y;
                     ctx.fillStyle = this.colors[r];
                     ctx.fillRect(brick_x, brick_y, this.width, this.height);
                 }
             }
+        }
+    }
+    
+    checkBricks () {
+        var allHit = true;
+        for (var r = 0; r < this.rcount; r++) {
+            for (var c = 0; c < this.ccount; c++) {
+                if (brick_info[r][c].hit == 0) {
+                    allHit = false;
+                }
+            }
+        }
+        
+        return allHit;
+    }
+    
+    reset () {
+        for (var r = 0; r < this.rcount; r++) {
+            for (var c = 0; c < this.ccount; c++) {
+                brick_info[r][c].hit = 0;
+            }
+        }
+    }
+}
+
+class Score {
+    constructor (y) {
+        // this.x = x;
+        this.y = y;
+        this.score = 0;
+        this.highScore = 0;
+    }
+    
+    draw (ctx) {
+        ctx.font = '14px Andale Mono';
+        ctx.fillStyle = 'darksalmon';
+        ctx.fillText('Score: ' + this.score + '   High Score: ' + this.highScore, canvas.width/2, this.y);
+    }
+    
+    reset () {
+        this.score = 0;
+    }
+    
+    increment () {
+        this.score += 1;
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
         }
     }
 }
@@ -140,6 +209,19 @@ class Game {
         this.paddle = new Paddle ((canvas.width - PADDLE_WIDTH)/2, canvas.height - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_SPEED, 0);
         var colors = ['plum', 'steelblue', 'lightgreen', 'yellow'];
         this.bricks = new Bricks (ROW, COL, BRICK_HEIGHT, PADDING, colors);
+        this.score = new Score (20);
+    }
+    
+    startGame () {
+        if (!input.enterPressed) {
+            this.ctx.font = '18px Andale Mono'
+            this.ctx.fillStyle = "darksalmon";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText('Welcome to Breakout!', this.canvas.width/2, this.canvas.height/3);
+            this.ctx.fillText('Press enter to start', this.canvas.width/2, this.canvas.height/2);
+        } else {
+            this.loop();
+        }
     }
     
     loop () {
@@ -158,15 +240,24 @@ class Game {
         this.ball.draw(this.ctx); 
         this.paddle.draw(this.ctx);
         this.bricks.draw(this.ctx);
+        this.score.draw(this.ctx);
     }
     
     checkCollisions () {
+        if (input.cheatKeyPressed) {
+            for (var c = 0; c < COL; c++) {
+                brick_info[0][c].hit = 1;
+            }
+            this.score.increment();    
+        }
+        
         for (var r = 0; r < this.bricks.rcount; r++) {
             for (var c = 0; c < this.bricks.ccount; c++) {
                 var br = brick_info[r][c];
                 if (br.hit == 0) {
                     if (this.ball.x + this.ball.dx > br.x && this.ball.x + this.ball.dx < br.x + this.bricks.width && this.ball.y + this.ball.dy > br.y && this.ball.y + this.ball.dy < br.y + this.bricks.height) {
                         this.ball.dy = -this.ball.dy;
+                        this.score.increment();
                         br.hit = 1;
                     }
                 }
@@ -182,11 +273,16 @@ class Game {
         } 
         else if (this.ball.y + this.ball.dy > this.canvas.height - this.ball.width ) {
             if (this.ball.x + this.ball.dx > this.paddle.x && this.ball.x + this.ball.dx < this.paddle.x + this.paddle.width ) {
+                if (this.bricks.checkBricks()) {
+                    this.bricks.reset();
+                }
                 this.ball.dy = -this.ball.dy;
             } 
             else {
-                alert("Game Over!");
-                document.location.reload();
+                this.ball.reset();
+                this.paddle.reset();
+                this.bricks.reset();
+                this.score.reset();
             }
         }
     }
@@ -213,6 +309,6 @@ document.addEventListener('keyup', event => input.keyUpHandler(event), false);
  */
 
 setInterval (function() {
-    game.loop();
+    game.startGame();
 }, 1000/FPS);
 
