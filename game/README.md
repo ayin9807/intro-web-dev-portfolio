@@ -13,4 +13,3 @@
     - I also could not figure out when exactly to make the bricks reappear after the player has hit all the bricks. In the current implementation, they reappear after the ball comes back to the paddle after breaking the last brick, but ideally I would like the bricks to disappear after the ball is on its way back to the paddle (but not still in the brick zone).
 - Other comments: 
     - My cheat code is pressing the "h" key to get rid of the top row of bricks (and I guess also increase one's score).
-    - My advertisement for my game is on the "projects" page on my webpage under 3. game: breakout. 
