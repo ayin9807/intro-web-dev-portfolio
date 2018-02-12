@@ -13,8 +13,25 @@ h1 {
     color: lightsalmon;
 }
 
-canvas {
+#canvas {
     display: block;
-    margin: 0 auto;
+    //margin: 0 auto;
     background: white;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+}
+
+#directions {
+    width: 320px;
+    height: 480px;
+    display: flex;
+    position: absolute;
+    top: 15%;
+    left: 23.3%;
+    font-family: "Andale Mono";
+    color: darkgray;
+    text-align: center;
+    background: antiquewhite;
+    justify-content: center;
 }
