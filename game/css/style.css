@@ -28,10 +28,9 @@ h1 {
     display: flex;
     position: absolute;
     top: 15%;
-    left: 23.3%;
+    left: 27.8%;
     font-family: "Andale Mono";
     color: darkgray;
     text-align: center;
     background: antiquewhite;
-    justify-content: center;
 }
