@@ -26,7 +26,7 @@ h1 {
     width: 320px;
     height: 480px;
     display: flex;
-    position: absolute;
+    position: relative;
     top: 15%;
     left: 27.8%;
     font-family: "Andale Mono";
