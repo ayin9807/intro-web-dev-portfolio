@@ -1,1 +1,12 @@
-###### **Name:** Annie Yin
+- Name: Annie Yin
+- NetID: wy30
+- Date Started: 2/8/18
+- Date Completed: 2/12/18
+- Estimated Number of Hours Worked: 10
+- Students with whom I discussed the assignment: None
+- Resources used:
+	- Mozilla's tutorial on Breakout (https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript)
+    - Info on keycodes (http://keycode.info/)
+- Assets: None
+- Bugs/concerns: 
+- Other comments: 
