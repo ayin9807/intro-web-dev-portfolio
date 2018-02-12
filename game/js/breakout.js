@@ -26,7 +26,7 @@ for (var r = 0; r < ROW; r++) {
 }
 
 // [h, r, l, b]
-var cheatCodeKey = [72, 82, 76, 66];
+// var cheatCodeKey = [72, 82, 76, 66];
 
 /*
  * Key input manager
@@ -151,6 +151,7 @@ class Bricks {
         }
     }
     
+    // checks if all the bricks have been hit
     checkBricks () {
         var allHit = true;
         for (var r = 0; r < this.rcount; r++) {
@@ -217,9 +218,8 @@ class Game {
             this.ctx.font = '18px Andale Mono'
             this.ctx.fillStyle = "darksalmon";
             this.ctx.textAlign = "center";
-            this.ctx.fillText('Welcome to Breakout!', this.canvas.width/2, this.canvas.height/3);
             this.ctx.fillText('Press enter to start', this.canvas.width/2, this.canvas.height/2);
-        } else {
+        } else {    // if enter is pressed, start game
             this.loop();
         }
     }
@@ -244,13 +244,17 @@ class Game {
     }
     
     checkCollisions () {
+        // cheat code
         if (input.cheatKeyPressed) {
             for (var c = 0; c < COL; c++) {
-                brick_info[0][c].hit = 1;
-            }
-            this.score.increment();    
+                if (brick_info[0][c].hit == 0) {
+                    brick_info[0][c].hit = 1;
+                    this.score.increment();
+                }
+            }   
         }
         
+        // collision with bricks
         for (var r = 0; r < this.bricks.rcount; r++) {
             for (var c = 0; c < this.bricks.ccount; c++) {
                 var br = brick_info[r][c];
@@ -264,10 +268,12 @@ class Game {
             }
         }
         
+        // collision with left/right wall
         if (this.ball.x + this.ball.dx > this.canvas.width - this.ball.width || this.ball.x + this.ball.dx < this.ball.width) {
             this.ball.dx = -this.ball.dx;
         }
         
+        // collision with top/bottom wall
         if (this.ball.y + this.ball.dy < this.ball.width) {
             this.ball.dy = -this.ball.dy;
         } 
@@ -279,12 +285,16 @@ class Game {
                 this.ball.dy = -this.ball.dy;
             } 
             else {
-                this.ball.reset();
-                this.paddle.reset();
-                this.bricks.reset();
-                this.score.reset();
+                this.endGame();
             }
         }
+    }
+    
+    endGame () {
+        this.ball.reset();
+        this.paddle.reset();
+        this.bricks.reset();
+        this.score.reset();
     }
 } 
 
