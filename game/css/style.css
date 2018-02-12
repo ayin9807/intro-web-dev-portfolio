@@ -5,12 +5,18 @@
 
 body {
     background-color: aliceblue;
+    color: darksalmon;
 }
 
 h1 {
     text-align: center;
     font-family: "Didot";
-    color: lightsalmon;
+}
+
+#ad2 {
+    position: absolute;
+    top: 30%;
+    right: 15%;
 }
 
 #canvas {
