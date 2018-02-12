@@ -7,10 +7,10 @@ header {
 h2 {
 	color: darksalmon;
 	text-align: center;
-	margin: 5% 0;
+	margin: 3% 0;
 }
 
-.container {
+#container {
 	display: inline-flex;
 	margin: auto;
 }
@@ -32,6 +32,12 @@ figure img{
 
 p {
 	text-align: center;
+}
+
+#break {
+	width: 30%;
+	display: block;
+	margin: 3% auto;
 }
 
 /*#container {
