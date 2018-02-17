@@ -107,21 +107,26 @@ $(function() {
     
     function makeModal () {
         var modal = $('<div class="modal"/>');
-        modal.append($('<div id="caption"/>'));
         modal.append($('<span class="close">&times;</span>'));
         modal.append($('<img id="modal-image">'));
+        modal.append($('<div id="caption"/>'));
         $('body').append(modal);
         
         $('.modal').css('display', 'none');
         $('.modal').css('position', 'fixed');
         $('.modal').css('z-index', '1');
+        $('.modal').css('padding-top', '100px');
+        $('.modal').css('left', '0');
+        $('.modal').css('top', '0');
+        $('.modal').css('overflow', 'auto');
         $('.modal').css('width', '100%');
         $('.modal').css('height', '100%');
         $('.modal').css('background-color', 'rgba(0, 0, 0, 0.9)');
         
         $('#modal-image').css('margin', 'auto');
         $('#modal-image').css('display', 'block');
-        $('#modal-image').css('width', '80%');
+        // $('#modal-image').css('width', '70%');
+        $('#modal-image').css('max-width', '700px');
         
         $('#caption').css('margin', 'auto');
         $('#caption').css('display', 'block');
@@ -147,7 +152,13 @@ $(function() {
             caption.text($(this).attr('alt'));
         });
         
-        var span = document.getElementsByClassName("close")[0];
+        var span = $('.close');
+        
+        span.hover(function () {
+            $(this).css('cursor', 'pointer');
+            }, function () {
+            $(this).css('cursor', 'auto');
+        });
         
         span.click(function () {
             modal.css('display', 'none');
