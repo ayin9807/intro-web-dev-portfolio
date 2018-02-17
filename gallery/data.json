@@ -1,90 +1,90 @@
 [{
 		"caption": "new york subway",
-		"link": "../img/andre-benz-257878.jpg",
+		"link": "../gallery/img/andre-benz-257878.jpg",
 		"category": "transportation"
 	},
 
 	{
 		"caption": "winding road",
-		"link": "../img/ashley-knedler-43546.jpg",
+		"link": "../gallery/img/ashley-knedler-43546.jpg",
 		"category": "transportation"
 	},
 
 	{
 		"caption": "snowboarding",
-		"link": "../img/austin-neill-212191.jpg",
+		"link": "../gallery/img/austin-neill-212191.jpg",
 		"category": "sports"
 	},
 
 	{
 		"caption": "starry banana bowl",
-		"link": "../img/brenda-godinez-227275.jpg",
+		"link": "../gallery/img/brenda-godinez-227275.jpg",
 		"category": "food"
 	},
 
 	{
 		"caption": "glasses",
-		"link": "../img/josh-calabrese-527813.jpg",
+		"link": "../gallery/img/josh-calabrese-527813.jpg",
 		"category": "scenery"
 	},
 
 	{
 		"caption": "noodles",
-		"link": "../img/clem-onojeghuo-97089.jpg",
+		"link": "../gallery/img/clem-onojeghuo-97089.jpg",
 		"category": "food"
 	},
 
 	{
 		"caption": "twilight",
-		"link": "../img/eugene-lim-260668.jpg",
+		"link": "../gallery/img/eugene-lim-260668.jpg",
 		"category": "scenery"
 	},
 
 	{
 		"caption": "room",
-		"link": "../img/joseph-albanese-102983.jpg",
+		"link": "../gallery/img/joseph-albanese-102983.jpg",
 		"category": "home"
 	},
 
 	{
 		"caption": "octagonal building",
-		"link": "../img/lily-lvnatikk-267356.jpg",
+		"link": "../gallery/img/lily-lvnatikk-267356.jpg",
 		"category": "urban"
 	},
 
 	{
 		"caption": "kitten",
-		"link": "../img/loek-hertog-501248.jpg",
+		"link": "../gallery/img/loek-hertog-501248.jpg",
 		"category": "animals"
 	},
 
 	{
 		"caption": "dim sum",
-		"link": "../img/marta-markes-541705.jpg",
+		"link": "../gallery/img/marta-markes-541705.jpg",
 		"category": "food"
 	},
 
 	{
 		"caption": "smile",
-		"link": "../img/nathan-dumlao-529803.jpg",
+		"link": "../gallery/img/nathan-dumlao-529803.jpg",
 		"category": "misc"
 	},
 
 	{
 		"caption": "orange",
-		"link": "../img/ricardo-gomez-angel-262359.jpg",
+		"link": "../gallery/img/ricardo-gomez-angel-262359.jpg",
 		"category": "scenery"
 	},
 
 	{
 		"caption": "reflective lake",
-		"link": "../img/yannick-pulver-410551.jpg",
+		"link": "../gallery/img/yannick-pulver-410551.jpg",
 		"category": "scenery"
 	},
 
 	{
 		"caption": "scrabble friends",
-		"link": "../img/hannah-rodrigo-320734.jpg",
+		"link": "../gallery/img/hannah-rodrigo-320734.jpg",
 		"category": "misc"
 	}
 ]
