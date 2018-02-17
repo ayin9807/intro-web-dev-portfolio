@@ -121,7 +121,7 @@ $(function() {
         $('.modal').css('overflow', 'auto');
         $('.modal').css('width', '100%');
         $('.modal').css('height', '100%');
-        $('.modal').css('background-color', 'rgba(0, 0, 0, 0.9)');
+        $('.modal').css('background-color', 'rgba(128, 128, 128, 0.9)');
         
         $('#modal-image').css('margin', 'auto');
         $('#modal-image').css('display', 'block');
@@ -129,6 +129,7 @@ $(function() {
         $('#modal-image').css('max-width', '700px');
         
         $('#caption').css('margin', 'auto');
+        $('#caption').css('padding-top', '1%');
         $('#caption').css('display', 'block');
         $('#caption').css('text-align', 'center');
         $('#caption').css('color', 'white');
