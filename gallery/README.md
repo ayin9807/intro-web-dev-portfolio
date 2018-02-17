@@ -5,9 +5,10 @@
 - Estimated Number of Hours Worked: 
 - Students with whom I discussed the assignment: None
 - Resources used:
-	- https://www.carnaghan.com/2016/10/using-jquery-ajax-to-retrieve-sample-json-data/ for help using AJAX
-- Assets: None
+	- AJAX help from "https://www.carnaghan.com/2016/10/using-jquery-ajax-to-retrieve-sample-json-data/"
+    - Modal implementation help from "https://www.w3schools.com/howto/howto_css_modal_images.asp"
+    - General checkbox filtering help from "https://www.dougv.com/2012/06/changing-an-image-based-on-a-checkbox-check-via-jquery-javascript/"
+- Assets:
+    - Free pictures from https://unsplash.com/ located in the **img** folder
 - Bugs/concerns: 
-    - 
 - Other comments: 
-    - 
