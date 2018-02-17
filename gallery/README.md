@@ -1,0 +1,13 @@
+- Name: Annie Yin
+- NetID: wy30
+- Date Started: 2/15/18
+- Date Completed: 2/19/18
+- Estimated Number of Hours Worked: 
+- Students with whom I discussed the assignment: None
+- Resources used:
+	- https://www.carnaghan.com/2016/10/using-jquery-ajax-to-retrieve-sample-json-data/ for help using AJAX
+- Assets: None
+- Bugs/concerns: 
+    - 
+- Other comments: 
+    - 
