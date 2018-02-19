@@ -50,6 +50,7 @@ $(function() {
         $('#slideshow').css('justify-content', 'center');
         $('#slideshow').css('align-items', 'center');
         $('button').css('font-size', '16px');
+        $('button').css('border-radius', '8px');
         
         //var slideIndex = 1;
         showImage(slideIndex);
@@ -76,7 +77,7 @@ $(function() {
         }
         
         images[slideIndex-1].style.display = 'block';
-        images[slideIndex-1].style.margin = '0';
+        images[slideIndex-1].style.margin = '1%';
         images[slideIndex-1].style.marginBottom = '3%';
         images[slideIndex-1].style.width = '50%';
     }
@@ -111,6 +112,7 @@ $(function() {
         $('#checkbox').css('color', 'steelblue');
         $('#checkbox').css('width', '100%'); 
         $('#checkbox').css('margin-bottom', '2%'); 
+        // $('#checkbox').css('border')
     }
     
     function getSlideshowInput () {
