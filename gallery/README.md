@@ -8,6 +8,7 @@
 	- AJAX help from "https://www.carnaghan.com/2016/10/using-jquery-ajax-to-retrieve-sample-json-data/"
     - Modal implementation help from "https://www.w3schools.com/howto/howto_css_modal_images.asp"
     - General checkbox filtering help from "https://www.dougv.com/2012/06/changing-an-image-based-on-a-checkbox-check-via-jquery-javascript/"
+    - Slideshow implementation help from "https://www.w3schools.com/w3css/w3css_slideshow.asp"
 - Assets:
     - Free pictures from https://unsplash.com/ located in the **img** folder
 - Bugs/concerns: 
