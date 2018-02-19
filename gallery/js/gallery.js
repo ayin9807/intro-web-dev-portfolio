@@ -5,6 +5,7 @@
 $(function() {
     
     var pictures = [];
+    var slideIndex = 1;
     
     // get pictures from json using ajax
     $.ajax({
@@ -21,13 +22,63 @@ $(function() {
             makeCheckboxes (pictures);
             addPics (pictures);
             makeModal ();
+            getSlideshowInput ();
             getCheckboxInput ();
             implementModal ();
         }
     });
     
     function makeSlideshow (pictures) {
+        // make buttons
+        $('#slideshow').append('<button id="left" onclick="plusImage(-1)" >&lArr;</button>');
         
+        // adding pics to represent each category to the slideshow
+        var slideshow = $('#slideshow');
+        var usedCategories = [];
+        for (var i = 0; i < pictures.length; i++) {
+            if (usedCategories.indexOf(pictures[i].category) < 0) {
+                var pic = $('<img class="slides" id =' + pictures[i].category + ' src=' + pictures[i].link + ' >');
+                pic.appendTo(slideshow);
+                usedCategories.push(pictures[i].category);
+            }
+        }
+    
+        $('#slideshow').append('<button id="right" onclick="plusImage(1)" >&rArr;</button>');
+        
+        // styling of slideshow
+        $('#slideshow').css('display', 'inline-flex');
+        $('#slideshow').css('justify-content', 'center');
+        $('#slideshow').css('align-items', 'center');
+        $('button').css('font-size', '16px');
+        
+        //var slideIndex = 1;
+        showImage(slideIndex);
+    }
+    
+    function plusImage (n) {
+        // console.log(slideIndex);
+        showImage(slideIndex += n);
+    }
+    
+    function showImage (n) {
+        //console.log(slideIndex);
+        var images = document.getElementsByClassName('slides');
+        // console.log(images);
+        if (n > images.length) {
+            slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = images.length;
+        }
+        
+        for (var i = 0; i < images.length; i++) {
+            images[i].style.display = 'none';
+        }
+        
+        images[slideIndex-1].style.display = 'block';
+        images[slideIndex-1].style.margin = '0';
+        images[slideIndex-1].style.marginBottom = '3%';
+        images[slideIndex-1].style.width = '50%';
     }
     
     function makeCheckboxes (pictures) {
@@ -62,6 +113,17 @@ $(function() {
         $('#checkbox').css('margin-bottom', '2%'); 
     }
     
+    function getSlideshowInput () {
+        $('.slides').click(function () {
+            var category = $(this).attr('id');
+            $('figure').each(function () {
+                if ($(this).attr('class') == category) {
+                    $(this).show();
+                } else { $(this).hide(); };
+            });
+        });
+    }
+    
     function getCheckboxInput () {
         // var checked = [];
         $('input').click(function () {
@@ -81,15 +143,13 @@ $(function() {
         for (var i = 0; i < pictures.length; i++) {
             var picDiv = $('<figure class=' + pictures[i].category + '/>');
             var image = $('<img class="original" src=' + pictures[i].link + ' >');
+            // set alt
             image.attr('alt', pictures[i].caption);
             picDiv.append(image);
-            // picDiv.append('<img class="original" src=' + pictures[i].link + 'alt=' + pictures[i].caption + ' >');
-            // var caption = $('<div id=caption>' + pictures[i].caption + '</div>');
-            // caption.css('display', 'none');
-            // picDiv.append(caption);
             $('#gallery').append(picDiv);
         }
         
+        // set style 
         $('.original').css('width', '350px');
         $('.original').css('max-width', '100%');
         $('.original').css('max-height', '450px');
@@ -106,12 +166,14 @@ $(function() {
     }
     
     function makeModal () {
+        // set up modal
         var modal = $('<div class="modal"/>');
         modal.append($('<span class="close">&times;</span>'));
         modal.append($('<img id="modal-image">'));
         modal.append($('<div id="caption"/>'));
         $('body').append(modal);
         
+        // set style
         $('.modal').css('display', 'none');
         $('.modal').css('position', 'fixed');
         $('.modal').css('z-index', '1');
@@ -142,11 +204,14 @@ $(function() {
     }
     
     function implementModal () {
+        // get modal
         var modal = $('.modal');
+        // get original image
         var image = $('.original');
         var modalImage = $('#modal-image');
         var caption = $('#caption');
         
+        // if click on image
         image.click(function () {
             modal.css('display', 'block');
             modalImage.attr('src', $(this).attr('src'));
@@ -164,20 +229,6 @@ $(function() {
         span.click(function () {
             modal.css('display', 'none');
         });
-        
-        /*$('.figure').each(function () {
-            var image = $('.original');
-            var modalImage = $('.modal-image');
-            image.click(function () {
-                modal.css('display', 'block');
-                modalImage.src = this.src;
-            });
-            
-            var span = $('.close')[0];
-            span.click(function () {
-                modal.css('display', 'none');
-            });
-        });*/
     }
     
 });
