@@ -2,7 +2,7 @@
 - NetID: wy30
 - Date Started: 2/15/18
 - Date Completed: 2/19/18
-- Estimated Number of Hours Worked: 
+- Estimated Number of Hours Worked: 12
 - Students with whom I discussed the assignment: None
 - Resources used:
 	- AJAX help from "https://www.carnaghan.com/2016/10/using-jquery-ajax-to-retrieve-sample-json-data/"
@@ -11,5 +11,5 @@
     - Slideshow implementation help from "https://www.w3schools.com/w3css/w3css_slideshow.asp"
 - Assets:
     - Free pictures from https://unsplash.com/ located in the **img** folder
-- Bugs/concerns: 
-- Other comments: 
+- Bugs/concerns: None
+- Other comments: None
