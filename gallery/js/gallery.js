@@ -30,7 +30,11 @@ $(function() {
     
     function makeSlideshow (pictures) {
         // make buttons
-        $('#slideshow').append('<button id="left" onclick="plusImage(-1)" >&lArr;</button>');
+        var left = $('<button id="left">&lArr;</button>');
+        left.click(function () {
+            plusImage(-1);
+        });
+        $('#slideshow').append(left);
         
         // adding pics to represent each category to the slideshow
         var slideshow = $('#slideshow');
@@ -43,7 +47,11 @@ $(function() {
             }
         }
     
-        $('#slideshow').append('<button id="right" onclick="plusImage(1)" >&rArr;</button>');
+        var right = $('<button id="right">&rArr;</button>');
+        right.click(function () {
+            plusImage(1);
+        });
+        $('#slideshow').append(right);
         
         // styling of slideshow
         $('#slideshow').css('display', 'inline-flex');
@@ -122,6 +130,14 @@ $(function() {
                 if ($(this).attr('class') == category) {
                     $(this).show();
                 } else { $(this).hide(); };
+            });
+            
+            $('input').each(function () {
+                if ($(this).attr('id') != category) {
+                    $(this).prop('checked', false);
+                } else {
+                    $(this).prop('checked', true);
+                }
             });
         });
     }
