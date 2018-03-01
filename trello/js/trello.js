@@ -26,7 +26,7 @@ var app = new Vue ({
     
     mounted: function () {
         $.ajax({
-            url: '../data.json',
+            url: 'trello/data.json',
             method: 'GET',
             success: function (data) {
                 this.lists = data;
