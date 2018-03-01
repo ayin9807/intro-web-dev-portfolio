@@ -1,0 +1,37 @@
+/*
+ * @author Annie Yin
+ */
+
+body {
+    font-family: "Optima";
+    list-style-type: none;
+}
+
+h1 {
+    font-family: "Didot";
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 1%;
+    background-color: lightblue;
+}
+
+#app {
+    display: flex;
+    flex-direction: row;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    display: block;
+    border: 2px solid darkgray;
+    border-radius: 1.5%;
+    padding: 1.5%;
+    margin: 1%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
