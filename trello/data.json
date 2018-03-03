@@ -5,13 +5,13 @@
         "cards": [{
             "name": "Analytics Data",
             "description": "Creating monthly marketing report showcasing campaign info and marketing data.",
-            "deadline": "3/5/17"
+            "deadline": "Mar 5"
         },
 
         {
             "name": "Website Redesign",
             "description": "Our brand & product have evolved over the past two years, and our website should be updated to reflect this. The new site will be mobile-first, responsive and lightweight.",
-            "deadline": "3/17/17"
+            "deadline": "Mar 17"
         }]
     },
 
@@ -21,13 +21,18 @@
 		"cards": [{
             "name": "Finish CS290 Project",
             "description": "Trello",
-            "deadline": "3/9/17"
+            "deadline": "Mar 9"
         },
 
         {
             "name": "Chinese Homework",
             "description": "Interview someone",
-            "deadline": "3/7/17"
+            "deadline": "Mar 5"
+        },
+        {
+            "name": "Complete Conference Powerpoint",
+            "description": "Modify to adhere to conference template",
+            "deadline": "Mar 9"
         }]
 	}
 ]

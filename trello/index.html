@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <!-- support for this page -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Playfair+Display|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -18,17 +20,50 @@
 </head>
     
 <body>
-    <h1>Trello</h1>
+    <div id="header">
+        <h1>Trello</h1>
+        <h5>Sign Up</h5>
+    </div>
     <div id="app">
-        <ul class="list" v-for="list in lists">
-            {{ list.name }} <br/>
-            <li class="card" v-for="c in list.cards">
+        <div class="list" v-for="l in listData">
+            <div class="list-header">
+                <h5>{{ l.name }}</h5> <i id="collapse" class="fa fa-minus-square"></i>
+            </div>
+            <div class="add-card" v-on:click="addCard"><i class="fa fa-plus"></i></div>
+            <div class="card" v-for="c in l.cards" v-on:click="showCard">
                 {{ c.name }} <br/>
-                {{ c.description }} <br/>
-                {{ c.deadline }} <br/>
-            </li>
-        </ul>
-        
+                <div class="deadline">
+                    <div class="clock"><img src="images/079-clock.png" /></div> 
+                    <p>{{ c.deadline }}</p> <br/>
+                </div>
+            </div>
+        </div>
+        <div id="add-list">
+            <i class="fa fa-plus-circle"></i>
+            <h5>Add list</h5>
+        </div>
+        <div id="add-modal">
+            <span id="add-close">&times;</span>
+            <div id="add-box">
+                <h5>Add Card</h5>
+                <div id="add-name">
+                    <input v-model="newCard.name" placeholder="Name">
+                </div> 
+                <div id="add-description">
+                    <textarea v-model="newCard.description" placeholder="Description" rows="4" cols="38"></textarea>
+                </div>
+                <div id="add-deadline">
+                    <input v-model="newCard.deadline" placeholder="Deadline">
+                </div>
+                <!--<div id="add-checklist">
+                    Checklist: 
+                </div> -->
+                <p id="save-card">Save</p>
+            </div>
+        </div>
+        <div id="show-modal">
+            <span id="show-close">&times;</span>
+        </div>
     </div>
 </body>
     

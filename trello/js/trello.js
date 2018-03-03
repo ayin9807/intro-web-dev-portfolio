@@ -4,41 +4,57 @@
  *
  */
 
-/*var cardsData = [
-    {
-        name: 'Analytics Data',
-        description: 'Creating monthly marketing report showcasing campaign info and marketing data.', 
-        deadline: '3/5/17'
-    },
-    
-    {
-        name: 'Website Redesign',
-        description: 'Our brand & product have evolved over the past two years, and our website should be updated to reflect this. The new site will be mobile-first, responsive and lightweight.',
-        deadline: '3/17/17'
-    }
-]*/
+var lists = [];
 
 var app = new Vue ({
     el: '#app',
     data: {
-        lists: null
+        listData: lists,
+        newCard: {name: '', description: '', deadline: ''},
+        newList: {name: '', cards: []}
+    },
+    
+    methods: {
+        addCard: function () {
+            var self = this;
+            var modal = $('#add-modal');
+            modal.css('display', 'block');
+            
+            $('#save-card').click(function () {
+                self.newCard.name = self.newCard.name.trim();
+                if (self.newCard.name) {
+                    self.listData.push(self.newCard);
+                }
+                modal.css('display', 'none');
+                $('input').val('');
+                $("textarea").val('');
+            })
+            
+            $('#add-close').click(function () {
+                modal.css('display', 'none');
+            })
+        }, 
+        
+        showCard: function () {
+            var self = this;
+            var modal = $('#show-modal');
+            modal.css('display', 'block');
+            
+            $('#show-close').click(function () {
+                modal.css('display', 'none');
+            })
+        }
+        
     },
     
     mounted: function () {
+        var self = this;
         $.ajax({
-            url: 'trello/data.json',
+            url: '../data.json',
             method: 'GET',
             success: function (data) {
-                this.lists = data;
-                console.log(this.lists);
+                self.listData = data;
             }
         });
     }
 });
-
-/*var app = new Vue({
-    el: '#app',
-    data: {
-        message: "Hi"
-    }
-})*/
