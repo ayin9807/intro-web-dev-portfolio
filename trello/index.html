@@ -36,7 +36,7 @@
                     {{ c.name }}
                     <i v-on:click="deleteCard($event)" class="fa fa-times"></i>
                 </div>
-                <div class="deadline">
+                <div class="deadline" v-if="c.deadline">
                     <div class="clock"><img src="images/079-clock.png" /></div> 
                     <p>{{ c.deadline }}</p> <br/>
                 </div>
@@ -44,11 +44,11 @@
         </div>
         <div id="add-list">
             <i class="fa fa-plus-circle"></i>
-            <h5>Add list</h5>
+            <h5 v-on:click="addList">Add list</h5>
         </div>
         <form id="add-modal">
             <span id="add-close">&times;</span>
-            <div id="add-box">
+            <div class="box">
                 <h5>Add Card</h5>
                 <div id="add-name">
                     <input v-model="newCard.name" placeholder="Name">
@@ -67,7 +67,7 @@
         </form>
         <div id="show-modal">
             <span id="show-close">&times;</span>
-            <div id="show-box">
+            <div class="box">
                 <div id="show-name"></div>
                 <div id="show-description"></div>
                 <div id="show-deadline"></div>

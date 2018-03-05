@@ -11,7 +11,7 @@ var app = new Vue ({
     data: {
         listData: lists,
         newCard: {name: '', description: '', deadline: '', id: null},
-        newList: {name: '', cards: []}
+        newList: {name: '', cards: [], id: null}
     },
     
     methods: {
@@ -25,24 +25,20 @@ var app = new Vue ({
             $('#add-close').off('click');
             $('#add-close').click(function () {
                 modal.css('display', 'none');
-            })
+            });
             
             $('#save-card').off('click');
             $('#save-card').click(function () {
                 modal.css('display', 'none');
                 self.newCard.name = self.newCard.name.trim();
                 self.newCard.id = self.listData[list].cards.length;
-                console.log(self.newCard);
                 if (self.newCard.name) {
                     self.listData[list].cards.push(self.newCard);
                 }
                 
                 $('#add-modal').get(0).reset();
                 self.newCard = {name: '', description: '', deadline: '', id: null};
-            })
-            
-            console.log(self.listData);
-            
+            });
         }, 
         
         showCard: function (event) {
@@ -51,16 +47,20 @@ var app = new Vue ({
             modal.css('display', 'block');
             var card = event.target.getAttribute('id');
             var list = event.target.parentElement.getAttribute('id');
+            
+            if (card == null) card = '0'
+            if (list == null) list = '0'
             console.log(card);
             console.log(list);
+            
+            $('#show-close').off('click');
+            $('#show-close').click(function () {
+                modal.css('display', 'none');
+            });
             
             $('#show-name').text(self.listData[list].cards[card].name);
             $('#show-description').text(self.listData[list].cards[card].description);
             $('#show-deadline').text(self.listData[list].cards[card].deadline);
-            
-            $('#show-close').click(function () {
-                modal.css('display', 'none');
-            })
         },
         
         deleteCard: function (event) {
@@ -76,7 +76,35 @@ var app = new Vue ({
         },
         
         addList: function () {
+            var self = this;
+            var listInput = $('<input id="list-input" v-model="newList.name" v-on:keyup.enter="submitList"/>');
+            listInput.css('margin-top', '2.5%');
+            listInput.css('margin-left', '2%');
+            listInput.css('height', '20%');
+            $('#add-list').replaceWith(listInput);
             
+            /*$('#list-input').on("keydown", function(e) {
+                if (e.keyCode == 13) {
+                    console.log(self.newList.name);
+                    self.newList.name = self.newList.name.trim();
+                    self.newList.id = self.listData.length;
+                    if (self.newList.name) {
+                        self.listData.push(self.newList);
+                    }
+
+                    $('#listInput').replaceWith(addList);
+                    self.newList = {name: '', cards: [], id: null};
+                    return false;
+                }
+            });*/
+        },
+        
+        submitList: function () {
+            var self = this;
+            var addButton = $('#add-list');
+            addButton.append('<i class="fa fa-plus-circle"></i><h5 v-on:click="addList">Add list</h5>');
+            
+            console.log(self.newList.name);
         },
         
         deleteList: function () {

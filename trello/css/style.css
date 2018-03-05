@@ -159,7 +159,7 @@ i {
     background-color: rgba(128, 128, 128, 0.7);
 }
 
-#add-box, #show-box {
+.box {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -169,18 +169,14 @@ i {
     border-radius: 10px;
 }
 
-#show-box {
-    
-}
-
-#add-box h5, p {
+.box h5, p {
     text-align: center;
     color: darkgray;
     margin-top: 10px;
     font-weight: bold;
 }
 
-#add-box div {
+.box div {
     margin-left: 10px;
     margin-top: 10px;
 }

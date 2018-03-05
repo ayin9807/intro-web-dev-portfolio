@@ -1,12 +1,12 @@
 - Name: Annie Yin
 - NetID: wy30
 - Date Started: 2/27/18
-- Date Completed: 3/1/18
-- Estimated Number of Hours Worked: 
-- Students with whom I discussed the assignment: None
+- Date Completed: 3/4/18
+- Estimated Number of Hours Worked: 12
+- Students with whom I discussed the assignment: 
+    - Carolyn Sun
 - Resources used:
-	
 - Assets:
-    
+    - Icons from IcoMoon Free (https://icomoon.io/)
 - Bugs/concerns: None
 - Other comments: None
