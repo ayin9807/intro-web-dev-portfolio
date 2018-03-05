@@ -45,11 +45,9 @@ var app = new Vue ({
             var self = this;
             var modal = $('#show-modal');
             modal.css('display', 'block');
-            var card = event.target.getAttribute('id');
-            var list = event.target.parentElement.getAttribute('id');
-            
-            if (card == null) card = '0'
-            if (list == null) list = '0'
+            var card = parseInt(event.currentTarget.getAttribute('id'));
+            var list = parseInt(event.currentTarget.parentElement.getAttribute('id'));
+        
             console.log(card);
             console.log(list);
             
