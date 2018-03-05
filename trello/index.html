@@ -25,13 +25,17 @@
         <h5>Sign Up</h5>
     </div>
     <div id="app">
-        <div class="list" v-for="l in listData">
+        <div class="list" v-for="(l, index) in listData" v-bind:id="index">
             <div class="list-header">
-                <h5>{{ l.name }}</h5> <i id="collapse" class="fa fa-minus-square"></i>
+                <h5>{{ l.name }}</h5> 
+                <a data-toggle="collapse" href="#collapseList"><i class="fa fa-chevron-down"></i></a>
             </div>
-            <div class="add-card" v-on:click="addCard"><i class="fa fa-plus"></i></div>
-            <div class="card" v-for="c in l.cards" v-on:click="showCard">
-                {{ c.name }} <br/>
+            <div class="add-card" v-on:click="addCard($event)"><i class="fa fa-plus"></i></div>
+            <div class="card" v-for="(c, index) in l.cards" v-on:click="showCard($event)" v-bind:id="index">
+                <div class="card-name">
+                    {{ c.name }}
+                    <i v-on:click="deleteCard($event)" class="fa fa-times"></i>
+                </div>
                 <div class="deadline">
                     <div class="clock"><img src="images/079-clock.png" /></div> 
                     <p>{{ c.deadline }}</p> <br/>
@@ -42,7 +46,7 @@
             <i class="fa fa-plus-circle"></i>
             <h5>Add list</h5>
         </div>
-        <div id="add-modal">
+        <form id="add-modal">
             <span id="add-close">&times;</span>
             <div id="add-box">
                 <h5>Add Card</h5>
@@ -50,7 +54,7 @@
                     <input v-model="newCard.name" placeholder="Name">
                 </div> 
                 <div id="add-description">
-                    <textarea v-model="newCard.description" placeholder="Description" rows="4" cols="38"></textarea>
+                    <textarea v-model="newCard.description" placeholder="Description" rows="4"></textarea>
                 </div>
                 <div id="add-deadline">
                     <input v-model="newCard.deadline" placeholder="Deadline">
@@ -60,9 +64,14 @@
                 </div> -->
                 <p id="save-card">Save</p>
             </div>
-        </div>
+        </form>
         <div id="show-modal">
             <span id="show-close">&times;</span>
+            <div id="show-box">
+                <div id="show-name"></div>
+                <div id="show-description"></div>
+                <div id="show-deadline"></div>
+            </div>
         </div>
     </div>
 </body>

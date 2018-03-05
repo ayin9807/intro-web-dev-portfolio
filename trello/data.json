@@ -1,38 +1,43 @@
 [
     {
         "name": "Work",
-        "id": 1,
+        "id": 0,
         "cards": [{
             "name": "Analytics Data",
             "description": "Creating monthly marketing report showcasing campaign info and marketing data.",
-            "deadline": "Mar 5"
+            "deadline": "Mar 5",
+            "id": 0
         },
 
         {
             "name": "Website Redesign",
             "description": "Our brand & product have evolved over the past two years, and our website should be updated to reflect this. The new site will be mobile-first, responsive and lightweight.",
-            "deadline": "Mar 17"
+            "deadline": "Mar 17",
+            "id": 1
         }]
     },
 
 	{
         "name": "School",
-        "id": 2,
+        "id": 1,
 		"cards": [{
             "name": "Finish CS290 Project",
             "description": "Trello",
-            "deadline": "Mar 9"
+            "deadline": "Mar 9",
+            "id": 0
         },
 
         {
             "name": "Chinese Homework",
             "description": "Interview someone",
-            "deadline": "Mar 5"
+            "deadline": "Mar 5",
+            "id": 1
         },
         {
             "name": "Complete Conference Powerpoint",
             "description": "Modify to adhere to conference template",
-            "deadline": "Mar 9"
+            "deadline": "Mar 9",
+            "id": 2
         }]
 	}
 ]

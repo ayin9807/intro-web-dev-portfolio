@@ -7,6 +7,10 @@ body {
     list-style-type: none;
 }
 
+i {
+    color: darkgray;
+}
+
 #header {
     display: flex;
     flex-direction: row;
@@ -29,7 +33,7 @@ body {
     margin-left: auto;
 }
 
-#header h5:hover, .list p:hover, i:hover, #add-close:hover, #save-card:hover, #show-close:hover {
+#header h5:hover, .list p:hover, #add-list:hover, #add-close:hover, #save-card:hover, #show-close:hover, .list-header i:hover{
     cursor: pointer;
 }
 
@@ -64,10 +68,8 @@ body {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
 }
 
-.list-header i {
-    margin-left: auto;
-    margin-right: 6.5%;
-    color: darkgray;
+.list-header a {
+    margin-left: 3%;
 }
 
 .card, .add-card {
@@ -79,6 +81,14 @@ body {
     width: 90%;
 }
 
+/*.card i {
+    display: none;
+}
+
+.card:hover + .card i {
+    display: block;
+}*/
+
 .add-card {
     text-align: center;
     color: darkgray;
@@ -87,6 +97,12 @@ body {
 .add-card:hover, .card:hover {
     cursor: pointer;
     background-color: #E8E8E8;
+}
+
+.card-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .clock {
@@ -99,7 +115,6 @@ body {
     flex-direction: row;
     align-items: center;
     font-size: 14px;
-    margin-top: 5px;
 }
 
 .deadline p {
@@ -118,13 +133,17 @@ body {
 #add-list {
     display: flex;
     flex-direction: row;
+    align-items: center;
     color: darkgray;
-    margin-top: 3%;
+    margin-top: 2.2%;
     margin-left: 3%;
+    height: 10%;
 }
 
 #add-list h5 {
+    margin-top: 7%;
     margin-left: 5px;
+    font-weight: bold;
 }
 
 #add-modal, #show-modal {
@@ -140,7 +159,7 @@ body {
     background-color: rgba(128, 128, 128, 0.7);
 }
 
-#add-box {
+#add-box, #show-box {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -148,6 +167,10 @@ body {
     width: 24%;
     height: 50%;
     border-radius: 10px;
+}
+
+#show-box {
+    
 }
 
 #add-box h5, p {
