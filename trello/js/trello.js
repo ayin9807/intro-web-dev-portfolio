@@ -180,7 +180,7 @@ var app = new Vue ({
             $('#save-name').off('click');
             $('#save-name').click(function () {
                 modal.css('display', 'none');
-                var newName = $('input').val();
+                var newName = $('#new-name').val();
                 self.listData[list].cards[card].name = newName;
                 $('#rename-modal').get(0).reset();
             });
@@ -218,7 +218,8 @@ var app = new Vue ({
             $('#save-name').off('click');
             $('#save-name').click(function () {
                 modal.css('display', 'none');
-                var newName = $('input').val();
+                var newName = $('#new-name').val();
+                console.log(newName);
                 self.listData[list].name = newName;
                 $('#rename-modal').get(0).reset();
             });
