@@ -22,7 +22,7 @@ var app = new Vue ({
             var self = this;
             var modal = $('#add-modal');
             modal.css('display', 'block');
-            var list = event.target.parentElement.getAttribute('id');
+            var list = event.target.parentElement.parentElement.getAttribute('id');
             
             $('.close').off('click');
             $('.close').click(function () {
@@ -48,7 +48,7 @@ var app = new Vue ({
             var modal = $('#show-modal');
             modal.css('display', 'block');
             var card = parseInt(event.currentTarget.getAttribute('id'));
-            var list = parseInt(event.currentTarget.parentElement.getAttribute('id'));
+            var list = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
 
             $('.close').off('click');
             $('.close').click(function () {
@@ -66,10 +66,9 @@ var app = new Vue ({
             if (e.stopPropagation) e.stopPropagation();
             var self = this;
             var card = event.target.parentElement.parentElement.getAttribute('id');
-            var list = event.target.parentElement.parentElement.parentElement.getAttribute('id');
+            var list = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
             
             self.listData[list].cards.splice(card, 1);
-            console.log(self.listData);
         },
         
         addList: function () {
@@ -152,19 +151,111 @@ var app = new Vue ({
                 $('#sign-in-modal').get(0).reset();
                 self.newUser = {name: '', email: '', id: null};
             });
-        }
+        },
         
-        /* editCardName: function (event) {
+        deleteList: function (event) {
+            var self = this;
+            var list = event.target.parentElement.parentElement.getAttribute('id');
+            console.log(list);
+            self.listData.splice(list, 1);
+        },
+        
+        editCardName: function (event) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            var self = this;
+            var modal = $('#rename-modal');
+            modal.css('display', 'block');
+            var card = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
+            var list = parseInt(event.currentTarget.parentElement.parentElement.parentElement.parentElement.getAttribute('id'));
+            console.log(list);
+            console.log(card);
+            
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            $('#save-name').off('click');
+            $('#save-name').click(function () {
+                modal.css('display', 'none');
+                var newName = $('input').val();
+                self.listData[list].cards[card].name = newName;
+                $('#rename-modal').get(0).reset();
+            });
+            
+            /*$('#' + list.toString() + '.list').find($('#' + card.toString() + '.card')).find($('.card-text')).replaceWith($('<input id="new-card-name" >'));
+            
+            $('#new-card-name').off('click');
+            $('#new-card-name').click(function () {
+                if (!e) var e = window.event;
+                e.cancelBubble = true;
+                if (e.stopPropagation) e.stopPropagation();
+                
+                $('#new-card-name').keypress(function(e) {
+                    if (e.which == 13) {
+                        var newName = $('#new-card-name').val();
+                        self.listData[list].cards[card].name = newName;
+                        $('#new-card-name').replaceWith('<p class="card-text" v-on:click="editCardName($event)">' + newName + '</p>');
+                    }
+                });
+            });*/
             
         },
         
         editListName: function (event) {
+            var self = this;
+            var modal = $('#rename-modal');
+            modal.css('display', 'block');
+            var list = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
             
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            $('#save-name').off('click');
+            $('#save-name').click(function () {
+                modal.css('display', 'none');
+                var newName = $('input').val();
+                self.listData[list].name = newName;
+                $('#rename-modal').get(0).reset();
+            });
+            
+            
+            /*$('#' + list.toString() + '.list').find($('h5')).replaceWith($('<input id="new-list-name" style="margin-left: 5%;">'));
+            
+            $('#new-list-name').off('click');
+            $('#new-list-name').click(function () {
+                if (!e) var e = window.event;
+                e.cancelBubble = true;
+                if (e.stopPropagation) e.stopPropagation();
+                
+                $('#new-list-name').keypress(function(e) {
+                    if (e.which == 13) {
+                        var newName = $('#new-list-name').val();
+                        self.listData[list].name = newName;
+                        $('#new-list-name').replaceWith('<h5 v-on:click="editListName($event)">' + newName + '</h5>');
+                    }
+                });
+            });*/
+            
+        }, 
+        
+        collapseList: function (event) {
+            var self = this;
+            var list = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
+            
+            $('#' + list.toString() + '.list').find($('.yo')).css('display', 'none');
         },
         
-        deleteList: function () {
+        expandList: function (event) {
+            var self = this;
+            var list = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
             
-        } */
+            $('#' + list.toString() + '.list').find($('.yo')).css('display', 'block');
+        }
     },
     
     mounted: function () {

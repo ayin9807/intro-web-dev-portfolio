@@ -46,7 +46,7 @@ i {
     margin-left: auto;
 }
 
-#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover{
+#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover, .list-header h5:hover{
     cursor: pointer;
 }
 
@@ -78,7 +78,7 @@ i {
     color: darksalmon;
 }
 
-.list-header a {
+.list-header i {
     margin-left: 3%;
 }
 
@@ -96,8 +96,12 @@ i {
     color: darkgray;
 }
 
-.add-card:hover, .card:hover {
+.add-card:hover {
     cursor: pointer;
+    background-color: #E8E8E8;
+}
+
+.card:hover {
     background-color: #E8E8E8;
 }
 
@@ -105,6 +109,10 @@ i {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.card-text {
+    margin-bottom: 4px;
 }
 
 .clock {
@@ -126,10 +134,22 @@ i {
     color: darkgray;
 }
 
+.deadline p:hover {
+    cursor: default;
+}
+
 .deadline img {
     margin: 5px;
     width: 15px;
     height: 15px;
+}
+
+.delete-list {
+    color: darksalmon;
+    opacity: 0.5;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5%;
 }
 
 #add-list {

@@ -31,19 +31,23 @@
         <div id="not-header">
             <div class="list" v-for="(l, index) in listData" v-bind:id="index">
                 <div class="list-header">
-                    <h5>{{ l.name }}</h5> 
-                    <a data-toggle="collapse" href="#collapseList"><i class="fa fa-chevron-down"></i></a>
+                    <h5 v-on:click="editListName($event)">{{ l.name }}</h5> 
+                    <i class="fa fa-chevron-up" v-on:click="collapseList($event)"></i>
+                    <i class="fa fa-chevron-down" v-on:click="expandList($event)"></i>
                 </div>
-                <div class="add-card" v-on:click="addCard($event)"><i class="fa fa-plus"></i></div>
-                <div class="card" v-for="(c, index) in l.cards" v-on:click="showCard" v-bind:id="index">
-                    <div class="card-name">
-                        {{ c.name }}
-                        <i v-on:click="deleteCard($event)" class="fa fa-times"></i>
+                <div class="yo">
+                    <div class="add-card" v-on:click="addCard($event)"><i class="fa fa-plus"></i></div>
+                    <div class="card" v-for="(c, index) in l.cards" v-on:click="showCard" v-bind:id="index">
+                        <div class="card-name">
+                            <p class="card-text" v-on:click="editCardName($event)">{{ c.name }}</p>
+                            <i v-on:click="deleteCard($event)" class="fa fa-times"></i>
+                        </div>
+                        <div class="deadline" v-if="c.deadline">
+                            <div class="clock"><img src="images/079-clock.png" /></div> 
+                            <p>{{ c.deadline }}</p> <br/>
+                        </div>
                     </div>
-                    <div class="deadline" v-if="c.deadline">
-                        <div class="clock"><img src="images/079-clock.png" /></div> 
-                        <p>{{ c.deadline }}</p> <br/>
-                    </div>
+                    <p class="delete-list" v-on:click="deleteList($event)">Delete</p>
                 </div>
             </div>
             <div id="add-list">
@@ -109,7 +113,14 @@
                 </div>
             </form>
             
-            
+            <form id="rename-modal" class="modal">
+                <span class="close">&times;</span>
+                <div class="box">
+                    <h5>Rename</h5>
+                    <input placeholder="Name">
+                    <p id="save-name" class="save">Save</p>
+                </div>
+            </form>
         </div>
     </div>
 </body>
