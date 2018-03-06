@@ -28,20 +28,32 @@ i {
 
 #header h5 {
     border: solid 2px white;
-    padding: 0.5%;
+    padding: 5px 10px;
     font-family: "Raleway", sans-serif;
+}
+
+#sign-up {
+    margin-left: 10px;
+}
+
+#log-in:hover, #sign-up:hover {
+    background-color: skyblue;
+}
+
+#user-header {
+    display: flex;
+    flex-direction: row;
     margin-left: auto;
 }
 
-#header h5:hover, .list p:hover, #add-list:hover, #add-close:hover, #save-card:hover, #show-close:hover, .list-header i:hover{
+#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover{
     cursor: pointer;
 }
 
-#app {
+#not-header {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    
 }
 
 .list {
@@ -64,8 +76,6 @@ i {
     flex-direction: row;
     align-items: center;
     color: darksalmon;
-    /*border: solid 2px darkgray;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
 }
 
 .list-header a {
@@ -80,14 +90,6 @@ i {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     width: 90%;
 }
-
-/*.card i {
-    display: none;
-}
-
-.card:hover + .card i {
-    display: block;
-}*/
 
 .add-card {
     text-align: center;
@@ -141,12 +143,16 @@ i {
 }
 
 #add-list h5 {
-    margin-top: 7%;
+    margin-top: 4%;
     margin-left: 5px;
     font-weight: bold;
 }
 
-#add-modal, #show-modal {
+#add-list input {
+    margin-left: 5px;
+}
+
+.modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -165,34 +171,50 @@ i {
     margin: 0 auto;
     background-color: white;
     width: 24%;
-    height: 50%;
+    overflow: hidden;
     border-radius: 10px;
 }
 
-.box h5, p {
+.box h5 {
     text-align: center;
-    color: darkgray;
     margin-top: 10px;
     font-weight: bold;
+    color: darksalmon;
+    font-size: 24px;
 }
 
 .box div {
     margin-left: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-#save-card {
+.save {
     align-self: flex-end;
     margin-top: 10%;
     margin-right: 2%;
     padding: 4px;
     border: solid 1px darkgray;
+    color: darkgray;
+    font-weight: bold;
 }
 
-#add-close, #show-close {
+.close {
     position: absolute;
     top: 7.5%;
     right: 36%;
     color: white;
     font-size: 40px;
+}
+
+#show-name {
+    margin-left: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: darksalmon;
+}
+
+#show-deadline {
+    color: darkgray;
 }
