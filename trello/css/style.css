@@ -40,6 +40,13 @@ i {
     background-color: skyblue;
 }
 
+#change-info {
+    position: absolute;
+    top: 2.6%;
+    right: 2%;
+    display: none;
+}
+
 #user-header {
     display: flex;
     flex-direction: row;

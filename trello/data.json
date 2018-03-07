@@ -5,9 +5,9 @@
         "cards": [{
             "name": "Analytics Data",
             "description": "Creating monthly marketing report showcasing campaign info and marketing data.",
-            "deadline": "3/5/2018",
+            "deadline": "3-5-2018",
             "id": 0,
-            "dateCreated": "2/28/2018",
+            "dateCreated": "2-28-2018",
             "todos": ["Learn pandas", "Talk to Joe"],
             "categories": ["urgent"]
         },
@@ -15,9 +15,9 @@
         {
             "name": "Website Redesign",
             "description": "Our brand & product have evolved over the past two years, and our website should be updated to reflect this. The new site will be mobile-first, responsive and lightweight.",
-            "deadline": "3/17/2018",
+            "deadline": "3-17-2018",
             "id": 1,
-            "dateCreated": "3/2/2018",
+            "dateCreated": "3-2-2018",
             "todos": ["Talk to marketing team"],
             "categories": []
         }]
@@ -29,9 +29,9 @@
 		"cards": [{
             "name": "Finish CS290 Project",
             "description": "Trello",
-            "deadline": "3/9/2018",
+            "deadline": "3-9-2018",
             "id": 0,
-            "dateCreated": "2/27/2018",
+            "dateCreated": "2-27-2018",
             "todos": ["Finish functionalities", "Get started on Firebase"],
             "categories": ["urgent", "school"]
         },
@@ -39,18 +39,18 @@
         {
             "name": "Chinese Homework",
             "description": "Interview someone",
-            "deadline": "3/5/2018",
+            "deadline": "3-5-2018",
             "id": 1,
-            "dateCreated": "2/28/2018",
+            "dateCreated": "2-28-2018",
             "todos": [],
             "categories": []
         },
         {
             "name": "Complete Conference Powerpoint",
             "description": "Modify to adhere to conference template",
-            "deadline": "3/9/2018",
+            "deadline": "3-9-2018",
             "id": 2,
-            "dateCreated": "3/3/2018",
+            "dateCreated": "3-3-2018",
             "todos": ["Need to look at template"],
             "categories": ["urgent"]
         }]

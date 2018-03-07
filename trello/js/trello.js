@@ -17,7 +17,9 @@ var app = new Vue ({
         newCard: {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: []},
         newList: {name: '', cards: [], id: null},
         newUser: {name: '', email: '', image: '', id: null},
-        newCategory: {name: '', color: ''}
+        newCategory: {name: '', color: ''},
+        userIndex: null,
+        clicked: 0
     },
     
     methods: {
@@ -38,7 +40,7 @@ var app = new Vue ({
                 self.newCard.name = self.newCard.name.trim();
                 self.newCard.id = self.listData[list].cards.length;
                 var today = new Date();
-                self.newCard.dateCreated = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear();
+                self.newCard.dateCreated = today.getFullYear() + '-' +  (today.getMonth()+1) + '-' + today.getDate();
                 if (self.newCard.name) {
                     self.listData[list].cards.push(self.newCard);
                 }
@@ -148,7 +150,8 @@ var app = new Vue ({
                 modal.css('display', 'none');
             });
             
-            var alreadyUser = false;
+            // var alreadyUser = false;
+            var userIndex = null;
             
             $('#sign-in').off('click');
             $('#sign-in').click(function () {
@@ -159,12 +162,14 @@ var app = new Vue ({
                         if (self.userData[i].name == self.newUser.name && self.userData[i].email == self.newUser.email) {
                             // TODO: add something to allow user to change their stuff
                             modal.css('display', 'none');
-                            alreadyUser = true;
+                            // alreadyUser = true;
+                            self.userIndex = i;
+                            console.log(self.userIndex);
                             break;
                         }
                     }
                     
-                    if (alreadyUser == false) {
+                    if (self.userIndex == null) {
                         var error = $('<p id="error">User not found. Please sign up!</p>');
                         error.css('text-align', 'center');
                         error.css('color', 'darkgray');
@@ -176,11 +181,38 @@ var app = new Vue ({
                             $('#error').replaceWith($('<p id="sign-in" class="save">Sign in</p>'))
                             modal.css('display', 'none');
                         });
+                    } else {
+                        $('#log-in').css('display', 'none');
+                        $('#sign-up').css('display', 'none');
+                        $('#change-info').css('display', 'block');
                     }
                 } 
                 
                 $('#sign-in-modal').get(0).reset();
                 self.newUser = {name: '', email: '', id: null};
+            });
+        },
+        
+        changeUserInfo: function () {
+            var self = this;
+            var modal = $('#change-user-modal');
+            modal.css('display', 'block');
+            
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            $('#save-changes').off('click');
+            $('#save-changes').click(function () {
+                modal.css('display', 'none');
+                var newName = $('#new-username').val();
+                var newEmail = $('#new-email').val();
+                self.userData[self.userIndex].name = newName;
+                self.userData[self.userIndex].email = newEmail;
+                modal.get(0).reset();
+                
+                console.log(self.userData);
             });
         },
         
@@ -200,8 +232,6 @@ var app = new Vue ({
             modal.css('display', 'block');
             var card = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
             var list = parseInt(event.currentTarget.parentElement.parentElement.parentElement.parentElement.getAttribute('id'));
-            console.log(list);
-            console.log(card);
             
             $('.close').off('click');
             $('.close').click(function () {
@@ -298,14 +328,45 @@ var app = new Vue ({
             // $('body').css('background-image', 'url("' + $('#background-image').val() + '")');
         },
         
-        // TODO:
         filterByDate: function () {
+            var self = this;
+            var dateInput = $('#filter-date').val();
+            var x = dateInput.split('-');
+            var enteredDate = new Date(x[2], x[0]-1, x[1]);
+            $('.card').css('background-color', 'white');
             
+            for (var i = 0; i < self.listData.length; i++) {
+                for (var j = 0; j < self.listData[i].cards.length; j++) {
+                    var y = self.listData[i].cards[j].dateCreated.split('-');
+                    var date = new Date(y[2], y[0]-1, y[1]);
+                    if (date < enteredDate) {
+                        var card = $('#' + i.toString() + '.list').find($('#' + j.toString() + '.card'));
+                        card.css('background-color', 'lightgray');
+                    }
+                 }
+            }
+            
+            $('#filter-date').val('');
         },
-        
-        // TODO: 
-        filterByColor: function () {
-            
+    
+        filterByColor: function (event) {
+            var self = this;
+            var category = event.target.getAttribute('id');
+            // console.log(category);
+            if (self.clicked == 1) {
+                $('.card').css('background-color', 'white');
+                self.clicked = 0;
+            } else {
+                for (var i = 0; i < self.listData.length; i++) {
+                    for (var j = 0; j < self.listData[i].cards.length; j++) {
+                        if (self.listData[i].cards[j].categories.indexOf(category) >= 0) {
+                            var card = $('#' + i.toString() + '.list').find($('#' + j.toString() + '.card'));
+                            card.css('background-color', 'lightgray');
+                        }
+                    }
+                }
+                self.clicked = 1;
+            }
         },
         
         addCategory: function () {
