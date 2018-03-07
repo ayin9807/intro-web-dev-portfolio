@@ -5,16 +5,19 @@
  */
 
 var lists = [];
-var users = [];
+var users = [{name: 'annie', email: 'wy30', id: 0}, {name: 'juliana', email: 'jvz2', id: 1}];
+var categories = [{name: 'urgent', color: 'red'}, {name: 'school', color: 'green'}];
 
 var app = new Vue ({
     el: '#app',
     data: {
         listData: lists,
         userData: users,
-        newCard: {name: '', description: '', deadline: '', id: null},
+        categoryData: categories,
+        newCard: {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: []},
         newList: {name: '', cards: [], id: null},
-        newUser: {name: '', email: '', id: null}
+        newUser: {name: '', email: '', image: '', id: null},
+        newCategory: {name: '', color: ''}
     },
     
     methods: {
@@ -34,13 +37,26 @@ var app = new Vue ({
                 modal.css('display', 'none');
                 self.newCard.name = self.newCard.name.trim();
                 self.newCard.id = self.listData[list].cards.length;
+                var today = new Date();
+                self.newCard.dateCreated = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear();
                 if (self.newCard.name) {
                     self.listData[list].cards.push(self.newCard);
                 }
                 
                 $('#add-modal').get(0).reset();
-                self.newCard = {name: '', description: '', deadline: '', id: null};
+                $('.added-tasks').remove();
+                self.newCard = {name: '', description: '', deadline: '', id: null, dateCreated: ''};
             });
+        },
+        
+        addTask: function () {
+            var self = this;
+            self.newCard.todos.push($('#add-task').val());
+            var newTask = $('<li class="added-tasks">' + $('#add-task').val() + '</li>');
+            newTask.css('color', 'darkgray');
+            newTask.css('margin-top', '5px');
+            $('ul').append(newTask);
+            $('#add-task').val('');
         },
     
         showCard: function () {
@@ -52,12 +68,26 @@ var app = new Vue ({
 
             $('.close').off('click');
             $('.close').click(function () {
+                $('#show-checklist').empty();
+                $('#show-created').empty();
                 modal.css('display', 'none');
             });
             
             $('#show-name').text(self.listData[list].cards[card].name);
             $('#show-description').text(self.listData[list].cards[card].description);
+            $('#show-checklist').append('<p style="color: darkgray; font-size: 17px; font-weight: bold; margin-bottom: 0;">Checklist: </p>');
+            for (var i = 0; i < self.listData[list].cards[card].todos.length; i++) {
+                var task = $('<div class="task-div"></div>');
+                task.css('display', 'flex');
+                task.css('flex-direction', 'row');
+                task.css('align-items', 'baseline');
+                task.css('margin', '0');
+                task.append($('<input style="width: 10%;" type="checkbox">'));
+                task.append($('<p style="margin-bottom: 0;">' + self.listData[list].cards[card].todos[i] + '</p>'));
+                $('#show-checklist').append(task);
+            }
             $('#show-deadline').text('Deadline: ' + self.listData[list].cards[card].deadline);
+            $('#show-datecreated').text('Date Created: ' + self.listData[list].cards[card].dateCreated);
         },
         
         deleteCard: function (event) {
@@ -127,6 +157,7 @@ var app = new Vue ({
                 if (self.newUser.name && self.newUser.email) {
                     for (var i = 0; i < self.userData.length; i++) {
                         if (self.userData[i].name == self.newUser.name && self.userData[i].email == self.newUser.email) {
+                            // TODO: add something to allow user to change their stuff
                             modal.css('display', 'none');
                             alreadyUser = true;
                             break;
@@ -219,7 +250,6 @@ var app = new Vue ({
             $('#save-name').click(function () {
                 modal.css('display', 'none');
                 var newName = $('#new-name').val();
-                console.log(newName);
                 self.listData[list].name = newName;
                 $('#rename-modal').get(0).reset();
             });
@@ -256,6 +286,48 @@ var app = new Vue ({
             var list = parseInt(event.currentTarget.parentElement.parentElement.getAttribute('id'));
             
             $('#' + list.toString() + '.list').find($('.yo')).css('display', 'block');
+        },
+        
+        chooseBackgroundColor: function () {
+            $('body').css('background-color', $('#background-color').val());
+        },
+        
+        // TODO: does not work
+        chooseBackgroundImage: function () {
+            console.log($('#background-image').val());
+            // $('body').css('background-image', 'url("' + $('#background-image').val() + '")');
+        },
+        
+        // TODO:
+        filterByDate: function () {
+            
+        },
+        
+        // TODO: 
+        filterByColor: function () {
+            
+        },
+        
+        addCategory: function () {
+            var self = this;
+            
+            var modal = $('#category-modal');
+            modal.css('display', 'block');
+            
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            $('#save-category').off('click');
+            $('#save-category').click(function () {
+                modal.css('display', 'none');
+                self.categoryData.push(self.newCategory);
+                console.log(self.categoryData);
+                $('#category-modal').get(0).reset();
+                self.newCategory = {name: '', color: ''};
+            });
+            
         }
     },
     

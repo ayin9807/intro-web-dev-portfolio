@@ -46,8 +46,50 @@ i {
     margin-left: auto;
 }
 
-#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover, .list-header h5:hover{
+#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover, .list-header h5:hover, #add-category:hover, .category:hover {
     cursor: pointer;
+}
+
+#customize {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3.8%;
+    margin-top: 20px;
+}
+
+#customize p {
+    color: darksalmon;
+    font-weight: bold;
+    font-size: 18px;
+    opacity: 0.6;
+}
+
+#background, #filter, #categories {
+    display: flex;
+    flex-direction: row;
+}
+
+#background input, #filter input {
+    margin-left: 2%;
+    margin-top: 3px;
+    height: 50%;
+    color: darkgray;
+}
+
+#add-category {
+    margin-left: 1.5%;
+    border: solid 2px darksalmon;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.category {
+    margin-left: 1.5%;
+    border-radius: 10px;
+    color: white;
+    height: 35px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #not-header {
@@ -59,7 +101,6 @@ i {
 .list {
     display: flex;
     flex-direction: column;
-    margin-top: 2%;
     margin-left: 3%;
     width: 18%;
     border-radius: 1.5%;
@@ -111,6 +152,19 @@ i {
     justify-content: space-between;
 }
 
+.card-categories {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4px;
+    height: 25px;
+}
+
+.colored-box {
+    width: 50px;
+    height: 10px;
+    border-radius: 10px;
+}
+
 .card-text {
     margin-bottom: 4px;
 }
@@ -146,7 +200,7 @@ i {
 
 .delete-list {
     color: darksalmon;
-    opacity: 0.5;
+    opacity: 0.6;
     text-align: center;
     font-weight: bold;
     margin-top: 5%;
@@ -157,7 +211,6 @@ i {
     flex-direction: row;
     align-items: center;
     color: darkgray;
-    margin-top: 2.2%;
     margin-left: 3%;
     height: 10%;
 }
@@ -204,14 +257,15 @@ i {
 }
 
 .box div {
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
+}
+
+.box input, .box textarea {
+    width: 100%;
 }
 
 .save {
     align-self: flex-end;
-    margin-top: 10%;
     margin-right: 2%;
     padding: 4px;
     border: solid 1px darkgray;
@@ -227,6 +281,16 @@ i {
     font-size: 40px;
 }
 
+#add-checklist {
+    margin-bottom: 0;
+}
+
+#pick-category {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
 #show-name {
     margin-left: 0;
     font-size: 20px;
@@ -235,6 +299,16 @@ i {
     color: darksalmon;
 }
 
+#show-checklist {
+    display: flex;
+    flex-direction: column;
+}
+
 #show-deadline {
+    color: darkgray;
+}
+
+#show-datecreated {
+    margin-top: 0;
     color: darkgray;
 }

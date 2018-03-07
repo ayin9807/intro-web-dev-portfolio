@@ -28,6 +28,26 @@
                 <h5 id="sign-up" v-on:click="addUser">Sign Up</h5>
             </div>
         </div>
+        <div id="customize">
+            <div id="background">
+                <p>Choose Background</p>
+                <input placeholder="Enter color (hex)" @keyup.enter="chooseBackgroundColor" id="background-color">
+                <p style="margin-left: 2%; color: darkgray;">or</p>
+                <input type="file" multiple="false" accept="image/*" id="background-image" v-on:change="chooseBackgroundImage">
+            </div>
+            <div id="filter">
+                <p>Filter</p>
+                <input placeholder="mm/dd/yyyy" @keyup.enter="filterByDate" id="filter-date">
+                <p style="margin-left: 2%; color: darkgray;">or by color/category below</p>
+            </div>
+            <div id="categories">
+                <p>Categories</p>
+                <p id="add-category" v-on:click="addCategory">Add</p>
+                <div class="category" v-for="(ca, index) in categoryData" v-bind:id="ca.name" :style="{'background-color': ca.color}">
+                    {{ ca.name }}
+                </div>
+            </div>
+        </div>
         <div id="not-header">
             <div class="list" v-for="(l, index) in listData" v-bind:id="index">
                 <div class="list-header">
@@ -46,6 +66,9 @@
                             <div class="clock"><img src="images/079-clock.png" /></div> 
                             <p>{{ c.deadline }}</p> <br/>
                         </div>
+                        <div class="card-categories" v-if="c.categories.length != 0">
+                            <div class="colored-box" v-for="ca in c.categories" :style="{'background-color': ca.color}"></div>
+                        </div>
                     </div>
                     <p class="delete-list" v-on:click="deleteList($event)">Delete</p>
                 </div>
@@ -61,7 +84,7 @@
                 <div class="box">
                     <h5>Add Card</h5>
                     <div id="add-name">
-                        <input v-model="newCard.name" placeholder="Name">
+                        <span><input v-model="newCard.name" placeholder="Name"></span>
                     </div> 
                     <div id="add-description">
                         <textarea v-model="newCard.description" placeholder="Description" rows="4"></textarea>
@@ -69,9 +92,20 @@
                     <div id="add-deadline">
                         <input v-model="newCard.deadline" placeholder="Deadline">
                     </div>
-                    <!--<div id="add-checklist">
-                        Checklist: 
-                    </div> -->
+                    <div id="add-images">
+                        <input type="file" multiple accept="image/*" id="card-images">
+                    </div>
+                    <div id="add-checklist">
+                        <ul>
+                            <li><input placeholder="What do you have to do?" id="add-task" @keyup.enter="addTask"></li>
+                        </ul>
+                    </div>
+                    <div id="pick-category">
+                        <div v-for="(ca, index) in categoryData" v-bind:id="ca.name" class="pick" :style="{'color': ca.color}">
+                            <input type="checkbox" :value="ca.name" v-model="newCard.categories">
+                            {{ ca.name }}
+                        </div>
+                    </div>
                     <p id="save-card" class="save">Save</p>
                 </div>
             </form>
@@ -81,7 +115,10 @@
                 <div class="box">
                     <div id="show-name"></div>
                     <div id="show-description"></div>
+                    <div id="show-checklist"></div>
+                    <div id="show-images"></div>
                     <div id="show-deadline"></div>
+                    <div id="show-datecreated"></div>
                 </div>
             </div>
 
@@ -117,8 +154,24 @@
                 <span class="close">&times;</span>
                 <div class="box">
                     <h5>Rename</h5>
-                    <input id="new-name" placeholder="Name">
+                    <div id="change-name">
+                        <input id="new-name" placeholder="Name">
+                    </div>
                     <p id="save-name" class="save">Save</p>
+                </div>
+            </form>
+            
+            <form id="category-modal" class="modal">
+                <span class="close">&times;</span>
+                <div class="box">
+                    <h5>Add Category</h5>
+                    <div id="add-category-name">
+                        <input v-model="newCategory.name" placeholder="Name">
+                    </div>
+                    <div id="add-category-color">
+                        <input v-model="newCategory.color" placeholder="Choose color (hex)">
+                    </div>
+                    <p id="save-category" class="save">Save</p>
                 </div>
             </form>
         </div>
