@@ -32,18 +32,18 @@ i {
     font-family: "Raleway", sans-serif;
 }
 
-#sign-up {
+#sign-up, #log-in {
     margin-left: 10px;
 }
 
-#log-in:hover, #sign-up:hover {
+#log-in:hover, #sign-up:hover, #change-orientation:hover {
     background-color: skyblue;
 }
 
 #change-info {
     position: absolute;
     top: 2.6%;
-    right: 2%;
+    right: 6%;
     display: none;
 }
 
@@ -137,6 +137,7 @@ i {
     margin-bottom: 2px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     width: 90%;
+    background-color: white;
 }
 
 .add-card {
@@ -162,7 +163,7 @@ i {
 .card-categories {
     display: flex;
     flex-direction: row;
-    margin-top: 4px;
+    margin-top: 10px;
     height: 25px;
 }
 
@@ -170,6 +171,7 @@ i {
     width: 50px;
     height: 10px;
     border-radius: 10px;
+    margin-right: 3px;
 }
 
 .card-text {

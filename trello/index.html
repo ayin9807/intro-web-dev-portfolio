@@ -26,6 +26,7 @@
             <h1>Trello</h1>
             <div id="user-header">
                 <h5 id="change-info" v-on:click="changeUserInfo">Change Info</h5>
+                <h5 id="change-orientation" v-on:click="changeOrientation">Change View</h5>
                 <h5 id="log-in" v-on:click="checkUser">Log In</h5>
                 <h5 id="sign-up" v-on:click="addUser">Sign Up</h5>
             </div>
@@ -35,7 +36,7 @@
                 <p>Choose Background</p>
                 <input placeholder="Enter color (hex)" @keyup.enter="chooseBackgroundColor" id="background-color">
                 <p style="margin-left: 2%; color: darkgray;">or</p>
-                <input type="file" multiple="false" accept="image/*" id="background-image" v-on:change="chooseBackgroundImage">
+                <input type="file" id="card-files" name="files[]" v-on:change="chooseBackgroundImage" />
             </div>
             <div id="filter">
                 <p>Filter</p>
@@ -70,8 +71,8 @@
                             <p>{{ card.deadline }}</p> <br/>
                         </div>
                         <!-- need to add back in c.categories.length-->
-                        <div class="card-categories">
-                            <div class="colored-box" v-for="(category, index) in card.categories" :style="{'background-color': category.color}">{{ category.name}} </div>
+                        <div class="card-categories" v-if="card.categories">
+                            <div class="colored-box" v-for="color in card.categories" :style="{'background-color': color}"></div>
                         </div>
                     </div>
                     <p class="delete-list" v-on:click="deleteList(list)">Delete</p>
@@ -97,7 +98,7 @@
                         <input v-model="newCard.deadline" placeholder="Deadline">
                     </div>
                     <div id="add-images">
-                        <input type="file" multiple accept="image/*" id="card-images">
+                        <input type="file" id="card-files" name="files[]" multiple />
                     </div>
                     <div id="add-checklist">
                         <ul>
@@ -106,7 +107,7 @@
                     </div>
                     <div id="pick-category">
                         <div v-for="(ca, index) in categoryData" v-bind:id="ca.name" class="pick" :style="{'color': ca.color}">
-                            <input type="checkbox" :value="ca.name" v-model="newCard.categories">
+                            <input type="checkbox" :value="ca.color" v-model="newCard.categories">
                             {{ ca.name }}
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                         <input placeholder="Email" v-model="newUser.email">
                     </div> 
                     <div id="add-picture">
-                
+                        <input type="file" id="user-files" name="files[]" />
                     </div>
                     <p id="save-user" class="save">Sign up</p>
                 </div>
@@ -191,6 +192,9 @@
                     </div>
                     <div id="change-user-email">
                         <input id="new-email" placeholder="New Email">
+                    </div>
+                    <div id="change-user-image">
+                        <input type="file" id="user-change-files" name="files[]" />
                     </div>
                     <p id="save-changes" class="save">Save</p>
                 </div>
