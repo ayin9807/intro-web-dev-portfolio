@@ -7,8 +7,9 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <!-- libraries neded for this page -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.5/vuefire.js"></script>
     <!-- support for this page -->
     <link href="https://fonts.googleapis.com/css?family=Pacifico|Playfair+Display|Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -45,34 +46,35 @@
             <div id="categories">
                 <p>Categories</p>
                 <p id="add-category" v-on:click="addCategory">Add</p>
-                <div class="category" v-bind:class="index" v-for="(ca, index) in categoryData" v-bind:id="ca.name" :style="{'background-color': ca.color}" v-on:click="filterByColor($event)">
-                    {{ ca.name }}
+                <div class="category" v-bind:class="index" v-for="(category, index) in categoryData" v-bind:id="category.name" :style="{'background-color': category.color}" v-on:click="filterByColor(category)">
+                    {{ category.name }}
                 </div>
             </div>
         </div>
         <div id="not-header">
-            <div class="list" v-for="(l, index) in listData" v-bind:id="index" draggable="true">
+            <div class="list" v-for="(list, index) in listData" v-bind:id="index" draggable="true">
                 <div class="list-header">
-                    <h5 v-on:click="editListName($event)">{{ l.name }}</h5> 
+                    <h5 v-on:click="editListName(list)">{{ list.name }}</h5> 
                     <i class="fa fa-chevron-up" v-on:click="collapseList($event)"></i>
                     <i class="fa fa-chevron-down" v-on:click="expandList($event)"></i>
                 </div>
                 <div class="yo">
-                    <div class="add-card" v-on:click="addCard($event)"><i class="fa fa-plus"></i></div>
-                    <div class="card" v-for="(c, index) in l.cards" v-on:click="showCard" v-bind:id="index" draggable="true">
+                    <div class="add-card" v-on:click="addCard(list)"><i class="fa fa-plus"></i></div>
+                    <div class="card" v-for="(card, index) in list.cards" v-on:click="showCard(list, index)" v-bind:id="index" v-if="card.show == true" draggable="true">
                         <div class="card-name">
-                            <p class="card-text" v-on:click="editCardName($event)">{{ c.name }}</p>
-                            <i v-on:click="deleteCard($event)" class="fa fa-times"></i>
+                            <p class="card-text" v-on:click="editCardName(list, index)">{{ card.name }}</p>
+                            <i v-on:click="deleteCard(list, index)" class="fa fa-times"></i>
                         </div>
-                        <div class="deadline" v-if="c.deadline">
+                        <div class="deadline" v-if="card.deadline">
                             <div class="clock"><img src="images/079-clock.png" /></div> 
-                            <p>{{ c.deadline }}</p> <br/>
+                            <p>{{ card.deadline }}</p> <br/>
                         </div>
-                        <div class="card-categories" v-if="c.categories.length != 0">
-                            <div class="colored-box" v-for="ca in c.categories" :style="{'background-color': ca.color}"></div>
+                        <!-- need to add back in c.categories.length-->
+                        <div class="card-categories">
+                            <div class="colored-box" v-for="(category, index) in card.categories" :style="{'background-color': category.color}">{{ category.name}} </div>
                         </div>
                     </div>
-                    <p class="delete-list" v-on:click="deleteList($event)">Delete</p>
+                    <p class="delete-list" v-on:click="deleteList(list)">Delete</p>
                 </div>
             </div>
             <div id="add-list">
@@ -135,7 +137,7 @@
                         <input placeholder="Email" v-model="newUser.email">
                     </div> 
                     <div id="add-picture">
-                        <input type="file" multiple="false" accept="image/*" id="user-image" v-model="newUser.image">
+                
                     </div>
                     <p id="save-user" class="save">Sign up</p>
                 </div>
@@ -160,7 +162,7 @@
                 <div class="box">
                     <h5>Rename</h5>
                     <div id="change-name">
-                        <input id="new-name" placeholder="Name">
+                        <input id="new-name" placeholder="Name" v-model="newName">
                     </div>
                     <p id="save-name" class="save">Save</p>
                 </div>
