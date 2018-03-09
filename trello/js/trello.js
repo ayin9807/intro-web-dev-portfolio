@@ -41,7 +41,9 @@ var app = new Vue ({
         newName: '',
         userKey: '',
         clicked: 0,
-        changed: 0
+        changed: 0,
+        dragElement: null,
+        insertIndex: null
     },
     
     firebase: {
@@ -80,7 +82,7 @@ var app = new Vue ({
                         // console.log(self.newCard.id);
                     })
                     
-                    /*var image = document.getElementById('card-files');
+                    var image = document.getElementById('card-files');
                     // console.log(image.files);
                     if (image.files.length > 0) {
                         var file = image.files;
@@ -94,7 +96,7 @@ var app = new Vue ({
                             });
                         }
                         console.log(allURLs);
-                    }*/
+                    }
                     
                     /*if (i == (file.length-1)) {
                         listRef.child(list['.key']).child('cards').push({
@@ -189,7 +191,16 @@ var app = new Vue ({
             // var card = event.target.parentElement.parentElement.getAttribute('id');
             // var list = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('id');
             
+            var i = 0;
             listRef.child(list['.key']).child('cards').child(index).remove();
+            var cardList = listRef.child(list['.key']).child('cards');
+            cardList.once('value', function(snapshot) {
+                for (var key in snapshot.val()) {
+                    cardList.child(key).update({'id': i});
+                    i = i + 1;
+                }
+            });
+            
         },
         
         // add list
@@ -275,7 +286,7 @@ var app = new Vue ({
                 self.newUser.email = self.newUser.email.trim();
                 if (self.newUser.name && self.newUser.email) {
                     userRef.once('value', function(snapshot) {
-                        for (key in snapshot.val()) {
+                        for (var key in snapshot.val()) {
                             userRef.child(key).once('value', function(snapshot) {
                                 // console.log(snapshot.val());
                                 var name = snapshot.val()['name'];
@@ -372,6 +383,15 @@ var app = new Vue ({
             // console.log(list);
             // self.listData.splice(list, 1);
             listRef.child(list['.key']).remove();
+            
+            var i = 0;
+            listRef.once('value', function(snapshot) {
+                for (var key in snapshot.val()) {
+                    listRef.child(key).update({'id': i});
+                    i = i + 1;
+                }
+            });
+            
         },
         
         // edit card name
@@ -454,7 +474,7 @@ var app = new Vue ({
         },
         
         // choose background image
-        // TODO: does not work
+        // Firebase: DONE
         chooseBackgroundImage: function () {
             // console.log($('#background-image').val());
             
@@ -565,6 +585,7 @@ var app = new Vue ({
             
         }, 
         
+        // still working on
         changeOrientation: function () {
             console.log('hi');
             if (self.changed == 0) {
@@ -582,6 +603,117 @@ var app = new Vue ({
                 $('.yo').css('display', 'block');
                 self.changed = 0;
             }
+        },
+        
+        // Firebase: DONE
+        moveListLeft: function (list, index) {
+            // console.log(list);
+            // console.log(index);
+            var prev = null;        // prev list after switch
+            var next = null;        // next list after switch
+
+            listRef.child(list['.key']).once('value', function(snapshot) {
+                prev = snapshot.val();
+                prev.id = index-1;
+                if (!prev.cards) prev.cards = {};
+            });
+            
+            // console.log(prev);
+            
+            listRef.once('value', function(snapshot1) {
+                for (var key in snapshot1.val()) {
+                    listRef.child(key).once('value', function(snapshot2) {
+                        var id = snapshot2.val().id;
+                        if (id == index-1) {
+                            next = snapshot2.val();
+                            next.id = index;
+                            if (!next.cards) next.cards = {};
+                            // console.log(next);
+                            listRef.child(key).update(prev);
+                        } else if (id == index) {
+                            listRef.child(key).update(next);
+                        }
+                    });
+                }
+            });
+        },
+        
+        // Firebase: DONE
+        moveListRight: function (list, index) {
+            var prev = null;        // prev list after switch
+            var next = null;        // next list after switch
+            
+            listRef.once('value', function(snapshot1) {
+                for (var key in snapshot1.val()) {
+                    listRef.child(key).once('value', function(snapshot2) {
+                        // console.log(snapshot2.val());
+                        if (snapshot2.val().id == index+1) {
+                            prev = snapshot2.val();
+                            prev.id = index;
+                            if (!prev.cards) prev.cards = {};
+                        }
+                    });
+                }
+            });
+            
+            listRef.once('value', function(snapshot1) {
+                for (var key in snapshot1.val()) {
+                    listRef.child(key).once('value', function(snapshot2) {
+                        if (snapshot2.val().id == index) {
+                            next = snapshot2.val();
+                            next.id = index+1;
+                            if (!next.cards) next.cards = {};
+                            // console.log(next);
+                            listRef.child(key).update(prev);
+                        } else if (snapshot2.val().id == index+1) {
+                            listRef.child(key).update(next);
+                        }
+                    });
+                }
+            });
+            
+        },
+        
+        moveCardUp: function () {
+            
+        },
+        
+        moveCardDown: function () {
+            
+        },
+        
+        dragStart: function (e) {
+            // var self = this;
+            console.log(e);
+            self.dragElement = e.target;
+            e.target.style.opacity = 0.5;
+            e.dataTransfer.setData('text', e.target.getAttribute('id'));
+        },
+        
+        dragEnd: function (e) {
+            console.log(e);
+            e.target.classList.remove('over'); 
+            e.target.style.opacity = 1;
+        },
+        
+        dragOver: function (e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+        }, 
+        
+        dragEnter: function (e) {
+            console.log(e);
+            e.target.classList.add('over');
+        },
+        
+        drop: function (e) {
+            if (self.dragElement != e.target) {
+                console.log(self.dragElement);
+                console.log(e.target);
+            }
         }
+        
     }
 });

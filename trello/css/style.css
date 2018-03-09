@@ -53,8 +53,12 @@ i {
     margin-left: auto;
 }
 
-#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover, .list-header h5:hover, #add-category:hover, .category:hover {
+#header h5:hover, .list p:hover, .close:hover, .save:hover, .list-header i:hover, .list-header h5:hover, #add-category:hover, .category:hover  {
     cursor: pointer;
+}
+
+.fa-angle-up {
+    margin-bottom: 5px;
 }
 
 #customize {

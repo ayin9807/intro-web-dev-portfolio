@@ -26,7 +26,7 @@
             <h1>Trello</h1>
             <div id="user-header">
                 <h5 id="change-info" v-on:click="changeUserInfo">Change Info</h5>
-                <h5 id="change-orientation" v-on:click="changeOrientation">Change View</h5>
+                <!--<h5 id="change-orientation" v-on:click="changeOrientation">Change View</h5>--> 
                 <h5 id="log-in" v-on:click="checkUser">Log In</h5>
                 <h5 id="sign-up" v-on:click="addUser">Sign Up</h5>
             </div>
@@ -55,13 +55,16 @@
         <div id="not-header">
             <div class="list" v-for="(list, index) in listData" v-bind:id="index" draggable="true">
                 <div class="list-header">
+                    <i class="fa fa-angle-left" v-if="list.id != 0" @click="moveListLeft(list, index)"></i>
                     <h5 v-on:click="editListName(list)">{{ list.name }}</h5> 
                     <i class="fa fa-chevron-up" v-on:click="collapseList($event)"></i>
                     <i class="fa fa-chevron-down" v-on:click="expandList($event)"></i>
+                    <i class="fa fa-angle-right right" v-if="list.id != (listData.length-1)" @click="moveListRight(list, index)"></i>
                 </div>
-                <div class="yo">
-                    <div class="add-card" v-on:click="addCard(list)"><i class="fa fa-plus"></i></div>
-                    <div class="card" v-for="(card, index) in list.cards" v-on:click="showCard(list, index)" v-bind:id="index" v-if="card.show == true" draggable="true">
+                <div class="add-card" v-on:click="addCard(list)"><i class="fa fa-plus"></i></div>
+                <div class="yo" droppable="true" @dragover="dragOver($event)" @drop="drop($event)">
+                    <div class="card" v-for="(card, index) in list.cards" v-on:click="showCard(list, index)" v-bind:id="index" v-if="card.show == true" draggable="true" @dragstart="dragStart($event)" @dragend="dragEnd($event)" @dragover="dragOver($event)" @dragenter="dragEnter($event)">
+                        <i class="fa fa-angle-up" v-if="card.id != 0" style="text-align: center;"></i>
                         <div class="card-name">
                             <p class="card-text" v-on:click="editCardName(list, index)">{{ card.name }}</p>
                             <i v-on:click="deleteCard(list, index)" class="fa fa-times"></i>
@@ -70,13 +73,14 @@
                             <div class="clock"><img src="images/079-clock.png" /></div> 
                             <p>{{ card.deadline }}</p> <br/>
                         </div>
-                        <!-- need to add back in c.categories.length-->
                         <div class="card-categories" v-if="card.categories">
                             <div class="colored-box" v-for="color in card.categories" :style="{'background-color': color}"></div>
                         </div>
+                        <i class="fa fa-angle-down" v-if="card.id != (list.cards.length-1)" style="text-align: center;"></i>
                     </div>
-                    <p class="delete-list" v-on:click="deleteList(list)">Delete</p>
+                    <div id="placeholder"></div>
                 </div>
+                <p class="delete-list" v-on:click="deleteList(list)">Delete</p>
             </div>
             <div id="add-list">
                 <i class="fa fa-plus"></i>
