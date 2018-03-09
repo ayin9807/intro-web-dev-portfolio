@@ -1,12 +1,32 @@
 - Name: Annie Yin
 - NetID: wy30
 - Date Started: 2/27/18
-- Date Completed: 3/4/18
-- Estimated Number of Hours Worked: 12
+- Date Completed: 3/9/18
+- Estimated Number of Hours Worked: 40-50?
 - Students with whom I discussed the assignment: 
     - Carolyn Sun
 - Resources used:
+    - Vue documentation (https://vuejs.org/v2/guide/)
+    - example_firebase repository (mainly for help on getting image inputs)
+    - Firebase documentation (https://firebase.google.com/docs/) 
+    - Stackoverflow for how to get values in Firebase (essentially taking learning to take snapshots)
+    - How to use Promises with Firebase from Firebase blog (https://firebase.googleblog.com/2016/01/keeping-our-promises-and-callbacks_76.html)
 - Assets:
-    - Icons from IcoMoon Free (https://icomoon.io/)
-- Bugs/concerns: None
-- Other comments: None
+    - Clock icon (in *images folder) from IcoMoon Free (https://icomoon.io/)
+    - Other icons from FontAwesome (https://fontawesome.com/icons?d=gallery)
+- Bugs/concerns: 
+	- Probably a lot, but I think everything I implemented works to a certain extent.
+- Other comments: 
+	- Two extra features: adding users to card and adding comments
+	- For some reason, I interpreted adding users to cards as you have to be logged in yourself and add yourself to the card instead of adding other users to the card. I hope that's okay? I know that at the very least an user should be logged in in order to add users. 
+	- I know technically multiple users can be logged in at the same time, but I implemented it as only one person can be logged at the same time given the scope of this app, users can't see different versions of the webpage.
+	- Can only add comments when you are logged in.
+	- What the icons on the cards mean:
+		- Times/x = delete card
+		- Arrows-alt = move card to different list
+		- Plus = add current logged-in user to card 
+		- Angle up/down for list = collapse/expand list
+		- Angle left/right for list = move list
+		- Angle up/down for comment = move card in list
+	- To change name of list/card, just click on the names themselves.
+	- To filter by category, click on the category divs and click again to show all cards.

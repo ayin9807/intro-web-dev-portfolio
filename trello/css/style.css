@@ -325,11 +325,19 @@ i {
     flex-direction: column;
 }
 
-#show-deadline {
+#show-deadline, #show-datecreated {
     color: darkgray;
 }
 
-#show-datecreated {
-    margin-top: 0;
-    color: darkgray;
+#show-name, #show-description, #show-deadline, #show-datecreated, #show-checklist, #show-images, #show-users, #show-comments {
+    margin: 3px;
 }
+
+#show-images {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+

@@ -174,7 +174,7 @@ var app = new Vue ({
             $('.close').off('click');
             $('.close').click(function () {
                 $('#show-checklist').empty();
-                // $('#show-created').empty();
+                $('#show-images').empty();
                 $('#show-users').empty();
                 $('#show-comments').empty();
                 modal.css('display', 'none');
@@ -183,12 +183,14 @@ var app = new Vue ({
             var numTodos = 0;
             var numUsers = 0;
             var numComments = 0;
+            var numImages = 0;
             
             listRef.child(list['.key']).child('cards').child(index).once('value', function(snapshot) {
                 var card = snapshot.val();
                 if ('todos' in card) numTodos = card['todos'].length;
                 if ('users' in card) numUsers = card['users'].length;
                 if ('comments' in card) numComments = card['comments'].length;
+                if ('images' in card) numImages = card['images'].length;
                 // console.log(numUsers);
                 // console.log(numComments)
                 
@@ -227,6 +229,17 @@ var app = new Vue ({
                         comment.css('margin', '0');
                         comment.append($('<li style="margin-bottom: 0;">' + card['comments'][i]['name'] + ': ' + card['comments'][i]['comment'] + '</li>'));
                         $('#show-comments').append(comment);
+                    }
+                }
+
+                console.log(numImages);
+                if (numImages != 0) {
+                    for (var i = 0; i < numImages; i++) {
+                        console.log(card['images'][i]);
+                        var image = $('<img src=' + card['images'][i] + ' >');
+                        image.css('width', '20px');
+                        image.css('height', '35px');
+                        $('#show-images').append(image)
                     }
                 }
                 
