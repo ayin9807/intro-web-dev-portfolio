@@ -64,7 +64,7 @@
                 <div class="add-card" v-on:click="addCard(list)"><i class="fa fa-plus"></i></div>
                 <div class="yo" droppable="true" @dragover="dragOver($event)" @drop="drop($event)">
                     <div class="card" v-for="(card, index) in list.cards" v-on:click="showCard(list, index)" v-bind:id="index" v-if="card.show == true" draggable="true" @dragstart="dragStart($event)" @dragend="dragEnd($event)" @dragover="dragOver($event)" @dragenter="dragEnter($event)">
-                        <i class="fa fa-angle-up" v-if="card.id != 0" style="text-align: center;"></i>
+                        <i class="fa fa-angle-up" v-if="card.id != 0" style="text-align: center;" @click="moveCardUp(list, card, index)"></i>
                         <div class="card-name">
                             <p class="card-text" v-on:click="editCardName(list, index)">{{ card.name }}</p>
                             <i v-on:click="deleteCard(list, index)" class="fa fa-times"></i>
@@ -73,10 +73,13 @@
                             <div class="clock"><img src="images/079-clock.png" /></div> 
                             <p>{{ card.deadline }}</p> <br/>
                         </div>
-                        <div class="card-categories" v-if="card.categories">
-                            <div class="colored-box" v-for="color in card.categories" :style="{'background-color': color}"></div>
+                        <div class="category-line">
+                            <div class="card-categories" v-if="card.categories">
+                                <div class="colored-box" v-for="color in card.categories" :style="{'background-color': color}"></div>
+                            </div>
+                            <i class="fa fa-arrows-alt" @click="moveCardAcross(list, card, index)"></i>
                         </div>
-                        <i class="fa fa-angle-down" v-if="card.id != (list.cards.length-1)" style="text-align: center;"></i>
+                        <i class="fa fa-angle-down" v-if="card.id != (Object.keys(list.cards).length-1)" style="text-align: center;" @click="moveCardDown(list, card, index)"></i>
                     </div>
                     <div id="placeholder"></div>
                 </div>
@@ -201,6 +204,17 @@
                         <input type="file" id="user-change-files" name="files[]" />
                     </div>
                     <p id="save-changes" class="save">Save</p>
+                </div>
+            </form>
+            
+            <form id="move-lists-modal" class="modal">
+                <span class="close">&times;</span>
+                <div class="box">
+                    <h5>Moving Lists</h5>
+                    <div id="change-list">
+                        <input id="new-list" placeholder="Name of list?" v-model="listTo">
+                    </div>
+                    <p id="save-list" class="save">Save</p>
                 </div>
             </form>
             

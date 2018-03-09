@@ -43,7 +43,7 @@ var app = new Vue ({
         clicked: 0,
         changed: 0,
         dragElement: null,
-        insertIndex: null
+        listTo: ''
     },
     
     firebase: {
@@ -674,12 +674,163 @@ var app = new Vue ({
             
         },
         
-        moveCardUp: function () {
+        // Firebase: DONE!
+        moveCardUp: function (list, card, index) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            console.log(list);
+            // console.log(card['.key'].id);
+            console.log(index);
+            
+            var prev = null;        // prev list after switch
+            var next = null;        // next list after switch
+            
+            listRef.child(list['.key']).child('cards').child(index).once('value', function(snapshot) {
+                // console.log(snapshot.val());
+                prev = snapshot.val();
+                prev.id = snapshot.val().id-1;
+                if (!prev.categories) prev.categories = [];
+                if (!prev.images) prev.images = [];
+                if (!prev.todos) prev.todos = [];
+            });
+            
+            // console.log(prev);
+            
+            listRef.child(list['.key']).child('cards').once('value', function(snapshot1) {
+               for (var key in snapshot1.val()) {
+                   listRef.child(list['.key']).child('cards').child(key).once('value', function(snapshot2) {
+                       // console.log(snapshot2.val());
+                       if (snapshot2.val().id == prev.id) {
+                           // console.log(prev.id);
+                           // console.log(snapshot2.val());
+                           next = snapshot2.val();
+                           next.id = prev.id + 1;
+                           if (!next.categories) next.categories = [];
+                           if (!next.images) next.images = [];
+                           if (!next.todos) next.todos = [];
+                           console.log(prev);
+                           // console.log(next);
+                           listRef.child(list['.key']).child('cards').child(key).update(prev);
+                       } else if (snapshot2.val().id == (prev.id+1)) {
+                           listRef.child(list['.key']).child('cards').child(key).update(next);
+                       }
+                   });
+               } 
+            });
+        },
+        
+        // Firebase: ongoing
+        moveCardDown: function (list, card, index) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            // console.log(list);
+            // console.log(card);
+            // console.log(index);
+            var nextID = null;
+            listRef.child(list['.key']).child('cards').child(index).once('value', function(snapshot) {
+                nextID = snapshot.val().id + 1;
+            });
+            
+            console.log(nextID);
+            
+            var prev = null;        // prev list after switch
+            var next = null;        // next list after switch
+            
+            listRef.child(list['.key']).child('cards').once('value', function(snapshot1) {
+                for (var key in snapshot1.val()) {
+                    listRef.child(list['.key']).child('cards').child(key).once('value', function(snapshot2) {
+                        // console.log(snapshot2.val());
+                        if (snapshot2.val().id == nextID) {
+                            prev = snapshot2.val();
+                            prev.id = nextID-1;
+                            if (!prev.categories) prev.categories = [];
+                            if (!prev.images) prev.images = [];
+                            if (!prev.todos) prev.todos = [];
+                        }
+                    });
+                }
+            });
+            
+            // console.log(prev);
+            
+            listRef.child(list['.key']).child('cards').once('value', function(snapshot1) {
+               for (var key in snapshot1.val()) {
+                   listRef.child(list['.key']).child('cards').child(key).once('value', function(snapshot2) {
+                       // console.log(snapshot2.val());
+                       if (snapshot2.val().id == (nextID-1)) {
+                           // console.log(prev.id);
+                           // console.log(snapshot2.val());
+                           next = snapshot2.val();
+                           next.id = nextID;
+                           if (!next.categories) next.categories = [];
+                           if (!next.images) next.images = [];
+                           if (!next.todos) next.todos = [];
+                           // console.log(prev);
+                           // console.log(next);
+                           listRef.child(list['.key']).child('cards').child(key).update(prev);
+                       } else if (snapshot2.val().id == nextID) {
+                           listRef.child(list['.key']).child('cards').child(key).update(next);
+                       }
+                   });
+               } 
+            });
             
         },
         
-        moveCardDown: function () {
+        moveCardAcross: function (list, card, index) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
             
+            var self = this;
+            var modal = $('#move-lists-modal');
+            modal.css('display', 'block');
+            
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            var foundList = false;
+            var modifiedCard = card;
+            // console.log(modifiedCard);
+            var newListRef = null;
+            
+            $('#save-list').off('click');
+            $('#save-list').click(function () {
+                modal.css('display', 'none');
+                
+                listRef.once('value', function(snapshot1) {
+                    // console.log(snapshot.val());
+                    for (var key in snapshot1.val()) {
+                        listRef.child(key).once('value', function(snapshot2) {
+                            if (snapshot2.val().name == self.listTo) {
+                                console.log(snapshot2.val());
+                                console.log(key);
+                                foundList = true;
+                                listRef.child(key).child('cards').push(card);
+                                newListRef = listRef.child(key).child('cards');
+                            }
+                        });
+                    }
+                });
+                
+                console.log(newListRef);
+                var i = 0;
+                newListRef.once('value', function(snapshot) {
+                    for (var key in snapshot.val()) {
+                        newListRef.child(key).update({'id': i});
+                        i = i + 1;
+                    }
+                });
+                
+                // delete card from original list
+                self.deleteCard(list, index);
+                $('#move-lists-modal').get(0).reset();
+                self.listTo = '';
+            });
         },
         
         dragStart: function (e) {

@@ -158,7 +158,7 @@ i {
     background-color: #E8E8E8;
 }
 
-.card-name {
+.card-name, .category-line {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
