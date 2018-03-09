@@ -37,7 +37,7 @@
                 <p>Choose Background</p>
                 <input placeholder="Enter color (hex)" @keyup.enter="chooseBackgroundColor" id="background-color">
                 <p style="margin-left: 2%; color: darkgray;">or</p>
-                <input type="file" id="card-files" name="files[]" v-on:change="chooseBackgroundImage" />
+                <input type="file" id="background-file" name="files[]" v-on:change="chooseBackgroundImage" />
             </div>
             <div id="filter">
                 <p>Filter</p>
@@ -100,13 +100,13 @@
                 <div class="box">
                     <h5>Add Card</h5>
                     <div id="add-name">
-                        <span><input v-model="newCard.name" placeholder="Name"></span>
+                        <span><input v-model="newCard.name" placeholder="Name" id="_name"></span>
                     </div> 
                     <div id="add-description">
-                        <textarea v-model="newCard.description" placeholder="Description" rows="4"></textarea>
+                        <textarea v-model="newCard.description" placeholder="Description" id="_description" rows="4"></textarea>
                     </div>
                     <div id="add-deadline">
-                        <input v-model="newCard.deadline" placeholder="Deadline">
+                        <input v-model="newCard.deadline" placeholder="Deadline" id="_deadline">
                     </div>
                     <div id="add-images">
                         <input type="file" id="card-files" name="files[]" multiple />
@@ -135,6 +135,8 @@
                     <div id="show-images"></div>
                     <div id="show-deadline"></div>
                     <div id="show-datecreated"></div>
+                    <div id="show-users"></div>
+                    <div id="show-comments"></div>
                 </div>
             </div>
 

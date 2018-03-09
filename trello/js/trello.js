@@ -32,10 +32,12 @@ db.ref('background').once('value', function(snapshot) {
     }
 });
 
-/*userRef.once('value', function(snapshot) {
+userRef.once('value', function(snapshot) {
     if (snapshot.val().logged == '') {
         $('#log-in').css('display', 'block');
         $('#sign-up').css('display', 'block');
+        $('#change-info').css('display', 'none');
+        $('#log-out').css('display', 'none');
     } else {
         $('#log-in').css('display', 'none');
         $('#sign-up').css('display', 'none');
@@ -49,7 +51,7 @@ db.ref('background').once('value', function(snapshot) {
             $('#user-header').append(image); 
         });
     }
-});*/
+});
 
 // connect Firebase to Vue
 Vue.use(VueFire);
@@ -79,6 +81,12 @@ var app = new Vue ({
     },
     
     methods: {
+        getURLPromise: function(f) {
+            return storageRef.child('images/' + f.name).put(f).then(function(snapshot) {
+                return snapshot.downloadURL;   
+            });
+        },
+
         // add card to list
         // Firebase: DONE
         addCard: function (list) {
@@ -97,48 +105,41 @@ var app = new Vue ({
             $('#save-card').off('click');
             $('#save-card').click(function () {
                 modal.css('display', 'none');
-                self.newCard.name = self.newCard.name.trim();
+                var name = self.newCard.name.trim();
+                var description = self.newCard.description.trim();
+                var deadline = self.newCard.deadline.trim();
+                var categories = self.newCard.categories;
+                var todos = self.newCard.todos;
                 // self.newCard.id = listRef.length;
                 if (self.newCard.name) {
-                    var today = new Date();
-                    self.newCard.dateCreated = (today.getMonth()+1) + '-' + today.getDate() + '-' + today.getFullYear();
-                    listRef.child(list['.key']).child('cards').once('value', function(snapshot) {
-                        self.newCard.id = snapshot.numChildren();
-                        // console.log(self.newCard.id);
-                    })
-                    
-                    var image = document.getElementById('card-files');
-                    // console.log(image.files);
-                    if (image.files.length > 0) {
-                        var file = image.files;
+                    var images = document.getElementById('card-files');
+                    // console.log(images.files);
+                    if (images.files.length > 0) {
+                        var file = images.files;
                         // console.log(file);
                         var allURLs = [];
                         for (var i = 0; i < file.length; i++) {
-                            console.log(file[i]);
-                            storageRef.child('images/' + file[i].name).put(file[i]).then(function(snapshot) {
-                                console.log(allURLs);
-                                allURLs.push(snapshot.downloadURL);    
-                            });
+                            // console.log(file[i]);
+                            allURLs.push(self.getURLPromise(file[i]));
                         }
-                        console.log(allURLs);
-                    }
-                    
-                    /*if (i == (file.length-1)) {
-                        listRef.child(list['.key']).child('cards').push({
-                            name: self.newCard.name,
-                            description: self.newCard.description, 
-                            deadline: self.newCard.deadline, 
-                            id: self.newCard.id, 
-                            dateCreated: self.newCard.dateCreated, 
-                            images: allURLs, 
-                            todos: self.newCard.todos, 
-                            categories: self.newCard.categories, 
-                            show: true
+                        
+                        Promise.all(allURLs).then(function(results) {
+                            var today = new Date();
+                            self.newCard.dateCreated = (today.getMonth()+1) + '-' + today.getDate() + '-' + today.getFullYear();
+                            listRef.child(list['.key']).child('cards').once('value', function(snapshot) {
+                                self.newCard.id = snapshot.numChildren();
+                            });
+                            self.newCard.images = results;
+                            self.newCard.name = name;
+                            self.newCard.description = description;
+                            self.newCard.deadline = deadline;
+                            self.newCard.categories = categories;
+                            self.newCard.todos = todos;
+                            // console.log(self.newCard.images);
+                            listRef.child(list['.key']).child('cards').push(self.newCard);
+
                         });
-                    }*/
-                    
-                     listRef.child(list['.key']).child('cards').push(self.newCard);
-                    // self.listData[list].cards.push(self.newCard);
+                    }
                 }
                 
                 // console.log(self.newCard.categories);
@@ -218,7 +219,7 @@ var app = new Vue ({
                     }
                 }
                 
-                console.log(numComments);
+                // console.log(numComments);
                 if (numComments != 0) {
                     $('#show-comments').append('<p style="color: darkgray; margin-bottom: 0;">Comments: </p>');
                     for (var i = 0; i < numComments; i++) {
@@ -317,7 +318,7 @@ var app = new Vue ({
                 }
                 
                 // why does it still appear??
-                $('.add-user').val('');
+                $('#add-user-modal').get(0).reset();
                 self.newUser = {name: '', email: '', image: '', id: null, status: false};
             });
         },
@@ -384,7 +385,7 @@ var app = new Vue ({
                 } 
                 
                 $('#sign-in-modal').get(0).reset();
-                self.newUser = {name: '', email: '', id: null};
+                self.newUser = {name: '', email: '', image: '', id: null, status: false};
             });
         },
         
@@ -403,11 +404,17 @@ var app = new Vue ({
             $('#save-changes').off('click');
             $('#save-changes').click(function () {
                 modal.css('display', 'none');
+
+                userRef.once('value', function(snapshot) {
+                    self.userKey = snapshot.val().logged;
+                });
+
                 var newName = $('#new-username').val();
                 var newEmail = $('#new-email').val();
                 // self.userData[self.userIndex].name = newName;
                 // self.userData[self.userIndex].email = newEmail;
                 var image = document.getElementById('user-change-files');
+
                 // console.log(image.files);
                 if (image.files.length > 0) {
                     var file = image.files[0];
@@ -423,6 +430,8 @@ var app = new Vue ({
                     });
                     // console.log(url);
                 }
+
+
                 
                 if (newName) userRef.child(self.userKey).update({'name': newName});
                 
@@ -535,7 +544,7 @@ var app = new Vue ({
         chooseBackgroundImage: function () {
             // console.log($('#background-image').val());
             
-            var image = document.getElementById('card-files');
+            var image = document.getElementById('background-file');
             // console.log(image.files);
             if (image.files.length > 0) {
                 var file = image.files[0];
@@ -909,6 +918,7 @@ var app = new Vue ({
             userRef.update({'logged': ''});
             $('#change-info').css('display', 'none');
             $('#log-out').css('display', 'none');
+            $('#user-header-image').remove();
             $('#log-in').css('display', 'block');
             $('#sign-up').css('display', 'block');
             
@@ -942,28 +952,28 @@ var app = new Vue ({
                         userRef.child(userKey).once('value', function(snapshot) {
                             name = snapshot.val().name;  
                         });
-                    }
-                });
-                
-                var newComments = [];
-                var newDict = {};
 
-                var cardRef = listRef.child(list['.key']).child('cards').child(index);
-                cardRef.once('value', function(snapshot) {
-                    // console.log(snapshot.val());
-                    if ('comments' in snapshot.val()) {
-                        newComments = snapshot.val().comments;
-                        newComments.push({'name': name, 'comment': self.newComment});
-                        // console.log('wrong');
-                    } else {
-                        newComments = [{'name': name, 'comment': self.newComment}];
-                        // console.log('right');
+                        var newComments = [];
+                        var newDict = {};
+
+                        var cardRef = listRef.child(list['.key']).child('cards').child(index);
+                        cardRef.once('value', function(snapshot) {
+                            // console.log(snapshot.val());
+                            if ('comments' in snapshot.val()) {
+                                newComments = snapshot.val().comments;
+                                newComments.push({'name': name, 'comment': self.newComment});
+                                // console.log('wrong');
+                            } else {
+                                newComments = [{'name': name, 'comment': self.newComment}];
+                                // console.log('right');
+                            }
+                            // console.log(newComments);
+                            newDict = snapshot.val();
+                            newDict.comments = newComments;
+                            // console.log(newDict);
+                            cardRef.update(newDict);
+                        });
                     }
-                    // console.log(newComments);
-                    newDict = snapshot.val();
-                    newDict.comments = newComments;
-                    // console.log(newDict);
-                    cardRef.update(newDict);
                 });
 
                 $('#comment-modal').get(0).reset();
