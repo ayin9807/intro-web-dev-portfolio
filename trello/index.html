@@ -25,6 +25,7 @@
         <div id="header">
             <h1>Trello</h1>
             <div id="user-header">
+                <h5 id="log-out" @click="logOut">Log Out</h5>
                 <h5 id="change-info" v-on:click="changeUserInfo">Change Info</h5>
                 <!--<h5 id="change-orientation" v-on:click="changeOrientation">Change View</h5>--> 
                 <h5 id="log-in" v-on:click="checkUser">Log In</h5>
@@ -64,7 +65,7 @@
                 <div class="add-card" v-on:click="addCard(list)"><i class="fa fa-plus"></i></div>
                 <div class="yo" droppable="true" @dragover="dragOver($event)" @drop="drop($event)">
                     <div class="card" v-for="(card, index) in list.cards" v-on:click="showCard(list, index)" v-bind:id="index" v-if="card.show == true" draggable="true" @dragstart="dragStart($event)" @dragend="dragEnd($event)" @dragover="dragOver($event)" @dragenter="dragEnter($event)">
-                        <i class="fa fa-angle-up" v-if="card.id != 0" style="text-align: center;" @click="moveCardUp(list, card, index)"></i>
+                        <i class="fa fa-angle-up" v-if="card.id != 0" style="text-align: center; width: 20px;" @click="moveCardUp(list, card, index)"></i>
                         <div class="card-name">
                             <p class="card-text" v-on:click="editCardName(list, index)">{{ card.name }}</p>
                             <i v-on:click="deleteCard(list, index)" class="fa fa-times"></i>
@@ -79,9 +80,12 @@
                             </div>
                             <i class="fa fa-arrows-alt" @click="moveCardAcross(list, card, index)"></i>
                         </div>
-                        <i class="fa fa-angle-down" v-if="card.id != (Object.keys(list.cards).length-1)" style="text-align: center;" @click="moveCardDown(list, card, index)"></i>
+                        <div class="comments">
+                            <p style="color: darkgray;" @click="addComment(list, card, index)">Add Comment</p>
+                            <i class="fa fa-plus" @click="addUserToCard(list, card, index)"></i>
+                        </div>
+                        <i class="fa fa-angle-down" v-if="card.id != (Object.keys(list.cards).length-1)" style="text-align: center; width: 20px;" @click="moveCardDown(list, card, index)"></i>
                     </div>
-                    <div id="placeholder"></div>
                 </div>
                 <p class="delete-list" v-on:click="deleteList(list)">Delete</p>
             </div>
@@ -139,7 +143,7 @@
                 <div class="box">
                     <h5>Create an account</h5>
                     <div id="add-username">
-                        <input placeholder="Username" v-model="newUser.name">
+                        <input placeholder="Username" v-model="newUser.name" />
                     </div> 
                     <div id="add-email">
                         <input placeholder="Email" v-model="newUser.email">
@@ -215,6 +219,17 @@
                         <input id="new-list" placeholder="Name of list?" v-model="listTo">
                     </div>
                     <p id="save-list" class="save">Save</p>
+                </div>
+            </form>
+            
+            <form id="comment-modal" class="modal">
+                <span class="close">&times;</span>
+                <div class="box">
+                    <h5>New Comment</h5>
+                    <div id="add-comment">
+                        <input id="new-comment" placeholder="Comment?" v-model="newComment">
+                    </div>
+                    <p id="save-comment" class="save">Save</p>
                 </div>
             </form>
             

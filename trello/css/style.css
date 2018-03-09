@@ -43,7 +43,14 @@ i {
 #change-info {
     position: absolute;
     top: 2.6%;
-    right: 6%;
+    right: 4%;
+    display: none;
+}
+
+#log-out {
+    position: absolute;
+    top: 2.6%;
+    right: 14%;
     display: none;
 }
 
@@ -158,9 +165,10 @@ i {
     background-color: #E8E8E8;
 }
 
-.card-name, .category-line {
+.card-name, .comments, .category-line {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     justify-content: space-between;
 }
 

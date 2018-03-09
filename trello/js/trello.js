@@ -25,8 +25,32 @@ var categoryRef = db.ref('categoryData');
 var backgroundRef = db.ref('background');
 db.ref('background').once('value', function(snapshot) {
     console.log(snapshot.val().name);
-    $('#app').css('background-color', snapshot.val().name);
+    if (snapshot.val().name.indexOf('https') >= 0) {
+        $('#app').css('background-image', 'url("' + snapshot.val().name + '")');
+    } else {
+        $('#app').css('background-color', snapshot.val().name);
+    }
 });
+
+/*userRef.once('value', function(snapshot) {
+    if (snapshot.val().logged == '') {
+        $('#log-in').css('display', 'block');
+        $('#sign-up').css('display', 'block');
+    } else {
+        $('#log-in').css('display', 'none');
+        $('#sign-up').css('display', 'none');
+        $('#change-info').css('display', 'block');
+        $('#log-out').css('display', 'block');
+        userRef.child(snapshot.val().logged).once('value', function(snapshot) {
+            var image = $('<img id="user-header-image" src=' + snapshot.val()['image'] + ' >')
+            image.css('height', '50px');
+            image.css('width', '35px');
+            image.css('border-radius', '10%');
+            $('#user-header').append(image); 
+        });
+    }
+});*/
+
 // connect Firebase to Vue
 Vue.use(VueFire);
 
@@ -34,16 +58,17 @@ var app = new Vue ({
     el: '#app',
     data: {
         // listData: lists
-        newCard: {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: [], show: true},
+        newCard: {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: [], show: true, users: [], comments: []},
         newList: {name: '', cards: [], id: null},
-        newUser: {name: '', email: '', image: '', id: null},
+        newUser: {name: '', email: '', image: '', id: null, status: false},
         newCategory: {name: '', color: ''},
         newName: '',
         userKey: '',
         clicked: 0,
         changed: 0,
         dragElement: null,
-        listTo: ''
+        listTo: '',
+        newComment: ''
     },
     
     firebase: {
@@ -120,7 +145,7 @@ var app = new Vue ({
                 
                 $('#add-modal').get(0).reset();
                 $('.added-tasks').remove();
-                self.newCard = {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: [], show: true};
+                self.newCard = {name: '', description: '', deadline: '', id: null, dateCreated: '', images: [], todos: [], categories: [], show: true, users: [], comments: []};
             });
         },
         
@@ -148,22 +173,29 @@ var app = new Vue ({
             $('.close').off('click');
             $('.close').click(function () {
                 $('#show-checklist').empty();
-                $('#show-created').empty();
+                // $('#show-created').empty();
+                $('#show-users').empty();
+                $('#show-comments').empty();
                 modal.css('display', 'none');
             });
             
-            var numTodos = null;
+            var numTodos = 0;
+            var numUsers = 0;
+            var numComments = 0;
             
             listRef.child(list['.key']).child('cards').child(index).once('value', function(snapshot) {
                 var card = snapshot.val();
                 if ('todos' in card) numTodos = card['todos'].length;
-                // console.log(numTodos);
+                if ('users' in card) numUsers = card['users'].length;
+                if ('comments' in card) numComments = card['comments'].length;
+                // console.log(numUsers);
+                // console.log(numComments)
                 
                 $('#show-name').text(card['name']);
                 $('#show-description').text(card['description']);
                 // why does || not work??????
-                if (numTodos != null) {
-                    $('#show-checklist').append('<p style="color: darkgray; font-size: 17px; font-weight: bold; margin-bottom: 0;">Checklist: </p>');
+                if (numTodos != 0) {
+                    $('#show-checklist').append('<p style="color: darkgray; margin-bottom: 0;">Checklist: </p>');
                     for (var i = 0; i < numTodos; i++) {
                         var task = $('<div class="task-div"></div>');
                         task.css('display', 'flex');
@@ -173,6 +205,27 @@ var app = new Vue ({
                         task.append($('<input style="width: 10%;" type="checkbox">'));
                         task.append($('<p style="margin-bottom: 0;">' + card['todos'][i] + '</p>'));
                         $('#show-checklist').append(task);
+                    }
+                }
+                
+                if (numUsers != 0) {
+                    $('#show-users').append('<p style="color: darkgray; margin-bottom: 0;">Users: </p>');
+                    for (var i = 0; i < numUsers; i++) {
+                        var user = $('<ul class="user-div"></ul>');
+                        user.css('margin', '0');
+                        user.append($('<li style="margin-bottom: 0;">' + card['users'][i] + '</li>'));
+                        $('#show-users').append(user);
+                    }
+                }
+                
+                console.log(numComments);
+                if (numComments != 0) {
+                    $('#show-comments').append('<p style="color: darkgray; margin-bottom: 0;">Comments: </p>');
+                    for (var i = 0; i < numComments; i++) {
+                        var comment = $('<ul class="comment-div"></ul>');
+                        comment.css('margin', '0');
+                        comment.append($('<li style="margin-bottom: 0;">' + card['comments'][i]['name'] + ': ' + card['comments'][i]['comment'] + '</li>'));
+                        $('#show-comments').append(comment);
                     }
                 }
                 
@@ -263,8 +316,9 @@ var app = new Vue ({
                     // self.userData.push(self.newUser);
                 }
                 
-                $('#add-user-modal').get(0).reset();
-                self.newUser = {name: '', email: '', image: '', id: null};
+                // why does it still appear??
+                $('.add-user').val('');
+                self.newUser = {name: '', email: '', image: '', id: null, status: false};
             });
         },
         
@@ -316,7 +370,10 @@ var app = new Vue ({
                         $('#log-in').css('display', 'none');
                         $('#sign-up').css('display', 'none');
                         $('#change-info').css('display', 'block');
+                        $('#log-out').css('display', 'block');
                         userRef.child(self.userKey).once('value', function(snapshot) {
+                            userRef.child(self.userKey).update({'status': true});
+                            userRef.update({'logged': self.userKey});
                             var image = $('<img id="user-header-image" src=' + snapshot.val()['image'] + ' >')
                             image.css('height', '50px');
                             image.css('width', '35px');
@@ -525,10 +582,10 @@ var app = new Vue ({
         // Firebase: DONE
         filterByColor: function (category) {
             var self = this;
-            var categoryName = '';
+            var categoryColor = '';
             categoryRef.once('value', function(snapshot) {
                 // console.log(snapshot.val()); 
-                categoryName = snapshot.val()[category['.key']]['name'];
+                categoryColor = snapshot.val()[category['.key']]['color'];
                 // console.log(categoryName);
             });
             
@@ -544,7 +601,7 @@ var app = new Vue ({
                             if (!card['categories']) {
                                 cardSnapshot.ref.update({'show': false});
                             }
-                            else if (card['categories'].indexOf(categoryName) < 0) {
+                            else if (card['categories'].indexOf(categoryColor) < 0) {
                                 cardSnapshot.ref.update({'show': false});
                             }
                         }
@@ -693,6 +750,8 @@ var app = new Vue ({
                 if (!prev.categories) prev.categories = [];
                 if (!prev.images) prev.images = [];
                 if (!prev.todos) prev.todos = [];
+                if (!prev.comments) prev.comments = [];
+                if (!prev.users) prev.users = [];
             });
             
             // console.log(prev);
@@ -709,6 +768,8 @@ var app = new Vue ({
                            if (!next.categories) next.categories = [];
                            if (!next.images) next.images = [];
                            if (!next.todos) next.todos = [];
+                           if (!next.comments) next.comments = [];
+                           if (!next.users) next.users = [];
                            console.log(prev);
                            // console.log(next);
                            listRef.child(list['.key']).child('cards').child(key).update(prev);
@@ -748,6 +809,8 @@ var app = new Vue ({
                             if (!prev.categories) prev.categories = [];
                             if (!prev.images) prev.images = [];
                             if (!prev.todos) prev.todos = [];
+                            if (!prev.comments) prev.comments = [];
+                            if (!prev.users) prev.users = [];
                         }
                     });
                 }
@@ -767,6 +830,8 @@ var app = new Vue ({
                            if (!next.categories) next.categories = [];
                            if (!next.images) next.images = [];
                            if (!next.todos) next.todos = [];
+                           if (!next.comments) next.comments = [];
+                           if (!next.users) next.users = [];
                            // console.log(prev);
                            // console.log(next);
                            listRef.child(list['.key']).child('cards').child(key).update(prev);
@@ -827,43 +892,128 @@ var app = new Vue ({
                 });
                 
                 // delete card from original list
-                self.deleteCard(list, index);
+                if (foundList) {
+                    self.deleteCard(list, index);
+                }
                 $('#move-lists-modal').get(0).reset();
                 self.listTo = '';
             });
         },
         
-        dragStart: function (e) {
-            // var self = this;
-            console.log(e);
-            self.dragElement = e.target;
-            e.target.style.opacity = 0.5;
-            e.dataTransfer.setData('text', e.target.getAttribute('id'));
+        logOut: function () {
+            var userKey = null;
+            userRef.once('value', function(snapshot) {
+                userKey = snapshot.val().logged;
+            });
+            userRef.child(userKey).update({'status': false});
+            userRef.update({'logged': ''});
+            $('#change-info').css('display', 'none');
+            $('#log-out').css('display', 'none');
+            $('#log-in').css('display', 'block');
+            $('#sign-up').css('display', 'block');
+            
         },
         
-        dragEnd: function (e) {
-            console.log(e);
-            e.target.classList.remove('over'); 
-            e.target.style.opacity = 1;
+        addComment: function (list, card, index) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            
+            var self = this;
+            var modal = $('#comment-modal');
+            modal.css('display', 'block');
+            
+            $('.close').off('click');
+            $('.close').click(function () {
+                modal.css('display', 'none');
+            });
+            
+            var userKey = null;
+            var name = '';
+            
+            $('#save-comment').off('click');
+            $('#save-comment').click(function () {
+                modal.css('display', 'none');
+                userRef.once('value', function(snapshot) {
+                    if (snapshot.val().logged == '') {
+                        alert('Not logged in! Please log in first before adding yourself to card.');
+                    } else {
+                        userKey = snapshot.val().logged;
+                        userRef.child(userKey).once('value', function(snapshot) {
+                            name = snapshot.val().name;  
+                        });
+                    }
+                });
+                
+                var newComments = [];
+                var newDict = {};
+
+                var cardRef = listRef.child(list['.key']).child('cards').child(index);
+                cardRef.once('value', function(snapshot) {
+                    // console.log(snapshot.val());
+                    if ('comments' in snapshot.val()) {
+                        newComments = snapshot.val().comments;
+                        newComments.push({'name': name, 'comment': self.newComment});
+                        // console.log('wrong');
+                    } else {
+                        newComments = [{'name': name, 'comment': self.newComment}];
+                        // console.log('right');
+                    }
+                    // console.log(newComments);
+                    newDict = snapshot.val();
+                    newDict.comments = newComments;
+                    // console.log(newDict);
+                    cardRef.update(newDict);
+                });
+
+                $('#comment-modal').get(0).reset();
+                self.newComment = '';
+            });
+            
         },
         
-        dragOver: function (e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
-            e.dataTransfer.dropEffect = 'move';
-        }, 
-        
-        dragEnter: function (e) {
-            console.log(e);
-            e.target.classList.add('over');
-        },
-        
-        drop: function (e) {
-            if (self.dragElement != e.target) {
-                console.log(self.dragElement);
-                console.log(e.target);
-            }
+        addUserToCard: function(list, card, index) {
+            if (!e) var e = window.event;
+            e.cancelBubble = true;
+            if (e.stopPropagation) e.stopPropagation();
+            
+            console.log(list);
+            console.log(card);
+            console.log(index);
+            var userKey = null;
+            var name = '';
+            
+            userRef.once('value', function(snapshot) {
+                if (snapshot.val().logged == '') {
+                    alert('Not logged in! Please log in first before adding yourself to card.');
+                } else {
+                    userKey = snapshot.val().logged;
+                }
+            });
+            
+            userRef.child(userKey).once('value', function(snapshot) {
+                name = snapshot.val().name;  
+            });
+            
+            var newUsers = [];
+            var newDict = {};
+            
+            var cardRef = listRef.child(list['.key']).child('cards').child(index);
+            cardRef.once('value', function(snapshot) {
+                console.log(snapshot.val());
+                if ('users' in snapshot.val()) {
+                    newUsers = snapshot.val().users;
+                    newUsers.push(name);
+                    console.log('wrong');
+                } else {
+                    newUsers = [name];
+                    console.log('right');
+                }
+                newDict = snapshot.val();
+                newDict.users = newUsers;
+                cardRef.update(newDict);
+            });
+            
         }
         
     }
