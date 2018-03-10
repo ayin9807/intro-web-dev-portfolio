@@ -9,11 +9,12 @@
     - Vue documentation (https://vuejs.org/v2/guide/)
     - example_firebase repository (mainly for help on getting image inputs)
     - Firebase documentation (https://firebase.google.com/docs/) 
-    - Stackoverflow for how to get values in Firebase (essentially taking learning to take snapshots)
+    - Stackoverflow for how to get values in Firebase (essentially taking learning to take snapshots) and how to stop event propagation.
     - How to use Promises with Firebase from Firebase blog (https://firebase.googleblog.com/2016/01/keeping-our-promises-and-callbacks_76.html)
 - Assets:
-    - Clock icon (in *images folder) from IcoMoon Free (https://icomoon.io/)
+    - Clock icon (in *images* folder) from IcoMoon Free (https://icomoon.io/)
     - Other icons from FontAwesome (https://fontawesome.com/icons?d=gallery)
+    - All pics in Firebase are mine.
 - Bugs/concerns: 
 	- Probably a lot, but I think everything I implemented works to a certain extent.
 - Other comments: 
