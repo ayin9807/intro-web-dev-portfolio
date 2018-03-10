@@ -30,3 +30,4 @@
 		- Angle up/down for comment = move card in list
 	- To change name of list/card, just click on the names themselves.
 	- To filter by category, click on the category divs and click again to show all cards.
+	- The cards with images take some time to load.
