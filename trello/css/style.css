@@ -114,11 +114,14 @@ i {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
 }
 
 .list {
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
     margin-left: 3%;
     width: 18%;
     border-radius: 1.5%;
@@ -309,6 +312,7 @@ i {
 #pick-category {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin: 0;
 }
 
@@ -330,7 +334,7 @@ i {
 }
 
 #show-name, #show-description, #show-deadline, #show-datecreated, #show-checklist, #show-images, #show-users, #show-comments {
-    margin: 3px;
+    margin: 5px;
 }
 
 #show-images {
