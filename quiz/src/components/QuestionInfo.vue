@@ -11,6 +11,7 @@
                 </div>
             </div>
         </div>
+        <input class="button" type="button" value="Previously Missed">
         <input class="button" type="button" value="Next" @click="nextQ"> 
     </div>
 </template>

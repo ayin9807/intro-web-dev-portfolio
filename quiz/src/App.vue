@@ -36,6 +36,7 @@ export default {
             quiztype: null,
             score: 0,
             unanswered: [0, 1, 2, 3, 4],
+            wrong: [],
             clear: null,
         }
     }, 
