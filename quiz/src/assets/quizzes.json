@@ -1,0 +1,124 @@
+{
+	"math": {
+		"info": [
+			{
+				"index": 0,
+				"question": "What is (8*9)+90/2?",
+				"answers": [90, 7, 20, 81, 117],
+				"correct": 117
+			}, 
+
+			{
+				"index": 1,
+				"question": "What is 2000%3?",
+				"answers": [2, 1, 0, 3, 10],
+				"correct": 2
+			},
+
+			{
+				"index": 2,
+				"question": "What is 6C3 (6 choose 3)?",
+				"answers": [12, 8, 3, 20, 10],
+				"correct": 20
+			}, 
+
+			{
+				"index": 3,
+				"question": "How many prime numbers are there in the first 20 positive integers?",
+				"answers": [7, 8, 6, 9, 10],
+				"correct": 8
+			}, 
+
+			{
+				"index": 4,
+				"question": "What is 2000*200/200/2000?",
+				"answers": [10, 5, 20, 0, 1],
+				"correct": 1
+			}
+		], 
+
+		"style": "lightblue"
+	}, 
+
+	"capitals": {
+		"info": [
+			{
+				"index": 0,
+				"question": "What is the capital of Latvia?",
+				"answers": ["Stockholm", "Riga", "Warsaw", "Oslo", "Copenhagen"],
+				"correct": "Riga"
+			},
+
+			{
+				"index": 1,
+				"question": "What is the capital of Singapore?",
+				"answers": ["Singapore", "Bangkok", "Busan", "Shanghai", "Kuala Lumpur"],
+				"correct": "Singapore"
+			},
+
+			{	
+				"index": 2,
+				"question": "What is the capital of Norway?",
+				"answers": ["Paris", "Geneva", "Milan", "Oslo", "Munich"],
+				"correct": "Oslo"
+			},
+
+			{
+				"index": 3,
+				"question": "What is the capital of Vietnam?",
+				"answers": ["Hanoi", "Hue", "Bangkok", "Ho Chi Minh City", "Manila"],
+				"correct": "Hanoi"
+			},
+
+			{
+				"index": 4,
+				"question": "What is the capital of Brazil?",
+				"answers": ["Rio de Janeiro", "Brasilia", "Lima", "Bueno Aires", "Sao Paulo"],
+				"correct": "Brasilia"
+			}
+		],
+
+		"style": "darksalmon"
+	},
+
+	"trivia": {
+		"info": [
+			{
+				"index": 0,
+				"question": "Which movie won Best Picture at the Oscars in 2017?",
+				"answers": ["La La Land", "Get Out", "Manchester by the Sea", "Arrival", "Moonlight"],
+				"correct": "Moonlight"
+			},
+
+			{
+				"index": 1,
+				"question": "How many singles Grand Slams has Serena Williams won?",
+				"answers": [23, 15, 20, 22, 19],
+				"correct": 19
+			},
+
+			{
+				"index": 2,
+				"question": "Tom Hanks played 'Captain Miller' in what legendary World War II movie?",
+				"answers": ["Inglourious Bastards", "Dunkirk", "Saving Private Ryan", "Letters from Iwo Jima", "Downfall"],
+				"correct": "Moonlight"
+			},
+
+			{	
+				"index": 3,
+				"question": "What year did the Titanic sink?",
+				"answers": [1910, 1912, 1906, 1915, 1920],
+				"correct": 1912
+			},
+
+			{	
+				"index": 4,
+				"question": "Diamonds are made up almost entirely of what element?",
+				"answers": ["Mercury", "Sulfur", "Iron", "Carbon", "Lead"],
+				"correct": "Carbon"
+			}
+		],
+
+		"style": "darkgray"
+	}
+}
