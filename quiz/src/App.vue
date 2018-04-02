@@ -3,7 +3,7 @@
 <template>
     <div id="app">
         <div id="frontpage" v-if="!quiztype">
-            <h2>{{title}}</h2>
+            <h2 id="title">{{title}}</h2>
             <div id="options">
                 <div class="choice" v-for="(key, value) in quizzes" v-bind:id="value" @click="displayQuiz(value)">
                     {{value}}
@@ -109,6 +109,10 @@ export default {
     color: #2c3e50;
     margin-top: 60px;
 }
+    
+    #title {
+        font-size: 28px;
+    }
 
 #options {
     display: flex;
@@ -117,7 +121,7 @@ export default {
     color: darksalmon;
     font-size: 26px;
     font-weight: bold;
-    margin-top: 15%;
+    margin-top: 5%;
 }
 
 .choice {

@@ -1,6 +1,5 @@
 <template>
-    <div id="QuestionInfo" style="background-color: info[quiz].style;">
-        {{info[quiz].style}}
+    <div id="question-info" v-bind:style="{'border-color': info[quiz].style}">
         <div id="title">Question {{currentQ+1}}</div>
         <div id="info">
             <div id="question">
@@ -12,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <input type="button" value="Next" @click="nextQ"> 
+        <input class="button" type="button" value="Next" @click="nextQ"> 
     </div>
 </template>
 
@@ -31,10 +30,26 @@
 </script>
 
 <style lang="scss" scoped>
+    
+#question-info {
+    border-style: solid;
+    border-width: thick;
+    width: 70%;
+    margin: 0 auto;
+}
 
 #title {
     text-align: center;
     font-size: 24px;
+    margin: 2% auto;
+}
+    
+#question {
+    margin: 1% auto;
+}
+    
+.button {
+    margin: 2% auto;
 }
     
 template {
