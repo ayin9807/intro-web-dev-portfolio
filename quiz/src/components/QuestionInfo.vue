@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <input class="button" type="button" value="Previously Missed">
+        <input v-if="remaining[0] != currentQ" class="button" type="button" value="Prev" @click="prevQ">
         <input class="button" type="button" value="Next" @click="nextQ"> 
     </div>
 </template>
@@ -25,7 +25,9 @@
             'currentQ',
             'nextQ',
             'onRadioChange',
-            'clear'
+            'clear',
+            'prevQ',
+            'remaining'
         ]
     }
 </script>

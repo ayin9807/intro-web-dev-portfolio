@@ -29,4 +29,5 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
     - lab-node answer key for the Node lab
 - Assets:
 - Bugs/concerns: 
-- Other comments: 
+- Other comments:
+    - Instead of graying out the button, I didn't show the button unless there was a previous question unanswered or missed.
