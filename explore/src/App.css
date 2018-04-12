@@ -1,0 +1,69 @@
+.App {
+    text-align: center;
+}
+
+.App-title {
+    font-size: 3em;
+    color: lightblue;
+}
+
+.App-title, .title, #Results, #Results-list {
+    font-family: "Courier New";
+}
+
+.title {
+    color: lightgray;
+    font-size: 1.6em;
+}
+
+#Search-title {
+    margin-bottom: 0;
+}
+
+.Main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.Search-comp, #Top-results {
+    max-width: 30%;
+    max-height: 50%;
+    border: solid 2px antiquewhite;
+    padding-bottom: 5%;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 25px;
+}
+
+.Search-box {
+    margin-top: 4%;
+    height: 20px;
+}
+
+#Results {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Result-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.Result-text {
+    flex-grow: 2;
+}
+
+.Upvote {
+    margin-left: 3%;
+    flex-grow: 1;
+}
+
+
